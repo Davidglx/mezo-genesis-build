@@ -17,7 +17,7 @@ const Landingpage = (): JSX.Element => {
         <LandingpageContainer>
             <LandingpageComponent1>
                 <Typography variant="h1">
-                    creating an incredible <span>Experience </span>on the mezo
+                    creating an incredible <span style={{ color: "red" }}>Experience </span>on the mezo
                 </Typography>
                 <StartButton
                     type="button"

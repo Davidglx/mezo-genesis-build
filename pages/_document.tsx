@@ -1,5 +1,4 @@
-// Copyright Tippers 🎲🃏 2022
-// 17 U.S.C §§ 101-1511
+
 
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
@@ -48,31 +47,31 @@ export default class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<link rel="icon" href="/assets/svg-logo.svg" type="image/jpg" sizes="16x16" />
+					<link rel="icon" href="/assets/mezo.svg" type="image/jpg" sizes="16x16" />
                     <meta
                         name="description"
-                        content="Tippers is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
                     />
                     <meta property="og:type" content="website" />
                     <meta
                         property="og:title"
-                        content="Tippers 🎲🃏"
+                        content="Mezo-genesis"
                     />
                     <meta property="og:image" content="/assets/svg-logo.svg" />
                     <meta
                         property="og:description"
-                        content="Tippers is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
                     />
                     <meta
                         name="twitter:title"
-                        content="Tippers is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
                     />
                     <meta
                         name="twitter:description"
-                        content="Tippers is a gaming platform built on the Polygon blockchain.."
+                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain.."
                     />
 				</Head>
-                <title> Tippers 🎲🃏</title>
+                <title> Mezo-genesis ⚡🪙 </title>
 				<body>
 					<Main />
 					<NextScript />

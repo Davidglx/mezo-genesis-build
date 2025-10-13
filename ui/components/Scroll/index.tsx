@@ -1,5 +1,4 @@
-// Copyright Tippers 🎲🃏 2022
-// 17 U.S.C §§ 101-1511
+
 
 // importing styles from styled-component
 import { ScrollContainer, ScrollTextHolder, ScrollText } from "./index.styled";
@@ -80,7 +79,7 @@ const Scroll = () : JSX.Element => {
     return (
       <ScrollContainer>
        <ScrollTextHolder>
-           <Marquee gradient={false} speed={25} pauseOnClick={true} pauseOnHover={true}>
+           <Marquee gradient={true} speed={45} pauseOnClick={true} pauseOnHover={true}>
           {
               words.map((each, i) => (
                  <ScrollText key={i}>
