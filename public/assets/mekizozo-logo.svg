@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="403" height="147" viewBox="0 0 403 147" role="img" aria-labelledby="title desc">
+  <title id="title">Pink wavy ribbon logo on dark gradient background</title>
+  <desc id="desc">Stylized pink double wave ribbon with soft shadow and subtle highlight.</desc>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060206"/>
+      <stop offset="70%" stop-color="#0b0711"/>
+      <stop offset="100%" stop-color="#120613"/>
+    </linearGradient>
+
+    <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f32b63"/>
+      <stop offset="50%" stop-color="#ef1f53"/>
+      <stop offset="100%" stop-color="#e6164a"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+      <feOffset dx="6" dy="8" in="blur" result="offset"/>
+      <feColorMatrix in="offset" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0.35" result="shadow"/>
+      <feBlend in="SourceGraphic" in2="shadow" mode="normal"/>
+    </filter>
+
+    <linearGradient id="highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+
+  <g transform="translate(28,48)" filter="url(#softShadow)">
+    <path
+      d="
+        M 0 32
+        C 0 14, 18 14, 30 14
+        C 54 14, 70 36, 96 36
+        C 122 36, 138 14, 162 14
+        C 174 14, 192 14, 192 32
+        C 192 50, 174 50, 162 50
+        C 138 50, 122 28, 96 28
+        C 70 28, 54 50, 30 50
+        C 18 50, 0 50, 0 32 z
+
+        M 192 32
+        C 192 14, 210 14, 222 14
+        C 246 14, 262 36, 288 36
+        C 314 36, 330 14, 354 14
+        C 366 14, 384 14, 384 32
+        C 384 50, 366 50, 354 50
+        C 330 50, 314 28, 288 28
+        C 262 28, 246 50, 222 50
+        C 210 50, 192 50, 192 32 z
+      "
+      fill="url(#ribbonGrad)"
+      stroke="none"
+      transform="scale(0.98) translate(6,0)"
+      />
+
+    <path
+      d="
+        M 6 22
+        C 6 14, 22 12, 34 12
+        C 58 12, 74 34, 100 34
+        C 126 34, 142 12, 166 12
+        C 178 12, 196 12, 196 22
+        C 196 30, 178 30, 166 30
+        C 142 30, 126 8, 100 8
+        C 74 8, 58 30, 34 30
+        C 22 30, 6 30, 6 22 z
+
+        M 196 22
+        C 196 14, 212 12, 224 12
+        C 248 12, 264 34, 290 34
+        C 316 34, 332 12, 356 12
+        C 368 12, 384 12, 384 22
+        C 384 30, 368 30, 356 30
+        C 332 30, 316 8, 290 8
+        C 264 8, 248 30, 224 30
+        C 212 30, 196 30, 196 22 z
+      "
+      fill="url(#highlight)"
+      opacity="0.65"
+      transform="scale(0.98) translate(6,0)"
+      />
+
+    <path
+      d="
+        M 4 34
+        C 4 22, 18 18, 30 18
+        C 54 18, 70 40, 96 40
+        C 122 40, 138 18, 162 18
+        C 174 18, 190 18, 190 34
+        "
+      fill="none"
+      stroke="#c9123f"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      opacity="0.12"
+      transform="scale(0.98) translate(6,0)"
+      />
+  </g>
+</svg>
