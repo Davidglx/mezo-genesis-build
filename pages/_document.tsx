@@ -71,7 +71,7 @@ export default class MyDocument extends Document {
                         content="Mezo-genesis is a gaming platform built on the Polygon blockchain.."
                     />
 				</Head>
-                <title> Mezo-genesis ⚡🪙 </title>
+                <title> MEZO-genesis ⚡🪙 </title>
 				<body>
 					<Main />
 					<NextScript />
