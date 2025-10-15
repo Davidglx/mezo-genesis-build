@@ -17,7 +17,8 @@
     "react-fast-marquee": "^1.6.5",
     "sass": "^1.93.2",
     "styled-components": "^6.1.19",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "use-sound": "^5.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
