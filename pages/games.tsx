@@ -8,6 +8,8 @@ import Gamepage from '../ui/widgets/Gamepage'
 export default function Home() {
   return (
      <Layout background={true}>
+    {/* //  <Layout background={false}> */}
+
        <Gamepage />
      </Layout>
   )
