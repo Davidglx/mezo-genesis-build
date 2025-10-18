@@ -1,5 +1,4 @@
-// Copyright Tippers 🎲🃏 2022
-// 17 U.S.C §§ 101-1511
+
 
 // importing relevant module
 import web3 from 'web3';
