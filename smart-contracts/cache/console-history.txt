@@ -1,0 +1,19 @@
+\que
+console.log("Result:", status.randomWord % 2n === 0n ? "TAILS" : "HEADS");
+console.log("Your choice:", status.choice === 0n ? "HEADS" : "TAILS");
+console.log("Did you win?", status.didWin);
+const status = await coinFlip.getStatus(requestId);
+const requestId = parseInt(receipt.logs[0].topics[1]);
+// Check result
+console.log("Confirmed! Request ID:", receipt.logs[0].topics[1]);
+const receipt = await tx.wait();
+// Wait for confirmation
+console.log("Transaction hash:", tx.hash);
+const tx = await coinFlip.flip(0, { value: ethers.parseEther("0.0001") });
+// Play! Bet 0.0001 BTC on HEADS (0)
+console.log("Contract balance:", ethers.formatEther(balance), "BTC");
+const balance = await coinFlip.getBalance();
+// Check balance
+const coinFlip = CoinFlip.attach("0x7be5A01080F9593CF07E2C72f53B66F5E3C77fA1");
+const CoinFlip = await ethers.getContractFactory("CoinFlip");
+// Connect to CoinFlip
