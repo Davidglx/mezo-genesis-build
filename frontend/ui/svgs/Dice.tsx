@@ -8,7 +8,7 @@ export const Dice = ({ size = '24px' }: { size?: string }): JSX.Element => (
 			<circle cx="50.5841" cy="49.8472" r="4.08583" fill="white" />
 			<circle cx="36.6923" cy="32.6867" r="4.08583" fill="white" />
 			<rect
-				x="80.8192"
+				x="80.8192" 
 				y="21.2463"
 				width="65.3733"
 				height="65.3733"
@@ -37,7 +37,7 @@ export const Dice = ({ size = '24px' }: { size?: string }): JSX.Element => (
 					values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
 					result="hardAlpha"
 				/>
-				<feOffset dy="3.69317" />
+				<feOffset dy="3.69317" /> 
 				<feGaussianBlur stdDeviation="1.84658" />
 				<feComposite in2="hardAlpha" operator="out" />
 				<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />

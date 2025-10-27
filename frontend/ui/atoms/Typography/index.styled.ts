@@ -2,11 +2,12 @@ import React from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { variant } from 'styled-system';
 
+
 enum VARIANT_BASED_TYPE {
 	h1 = 'h1',
 	h2 = 'h2',
 	h3 = 'h3',
-	h4 = 'h4',
+	h4 = 'h4', 
 	h5 = 'h5',
 	div = 'body',
 	p = 'p',
