@@ -1,5 +1,4 @@
 
-
 // declaring global module
 declare let window: any;
 declare let ethereum: any;
