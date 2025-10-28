@@ -37,7 +37,12 @@ const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <TextLogo href="/">
-        <img style={{ width: "12rem" }} src="/assets/mezo.svg" alt="" />
+        {/* <img style={{ width: "12rem" }} src="/assets/mezo.svg" alt="" /> */}
+        {/* <img style={{ width: "6rem" }} src="/assets/real-chip.png" alt="" /> */}
+        {/* <img style={{ width: "6rem" }} src="/assets/casi-casi-new.png" alt="" /> */}
+        <img style={{ width: "6rem" }} src="/assets/poker-chip.png" alt="" />
+
+
       </TextLogo>
 
       <SVGLogo href="/">
