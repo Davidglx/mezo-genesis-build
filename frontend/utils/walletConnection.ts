@@ -20,7 +20,7 @@ export const metaMaskConnection:connectwalletTypes["metaMaskConnection"] = (disp
   // check if polygon network then request
   if(typeof window !== "undefined" && typeof window.ethereum !== "undefined" && window.ethereum.chainId !== "0x13881") {
     try {
-        dispatch(alert("switching to polygon"))
+        dispatch(alert("switching to mezo"))
         ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: "0x13881"}],
@@ -111,7 +111,7 @@ export const walletDisconnect = (dispatch: (arg0: { payload: string; type: `${st
   dispatch(alert('wallet disconnected'))
   dispatch(setUserAddress(''))
   setTimeout(() => {
-    dispatch(alert('disconnect tippers on metamask'))
+    dispatch(alert('disconnect mezo-genesis on metamask'))
   }, 2000) 
   setTimeout(() => {
     dispatch(close(""))

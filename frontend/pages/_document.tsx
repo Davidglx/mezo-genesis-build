@@ -47,10 +47,10 @@ export default class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<link rel="icon" href="/assets/mezo.svg" type="image/jpg" sizes="16x16" />
+					<link rel="icon" href="/assets/poker-chip.png" type="image/jpg" sizes="16x16" />
                     <meta
                         name="description"
-                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the mezo blockchain."
                     />
                     <meta property="og:type" content="website" />
                     <meta
@@ -60,15 +60,15 @@ export default class MyDocument extends Document {
                     <meta property="og:image" content="/assets/svg-logo.svg" />
                     <meta
                         property="og:description"
-                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the mezo blockchain."
                     />
                     <meta
                         name="twitter:title"
-                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain."
+                        content="Mezo-genesis is a gaming platform built on the mezo blockchain."
                     />
                     <meta
                         name="twitter:description"
-                        content="Mezo-genesis is a gaming platform built on the Polygon blockchain.."
+                        content="Mezo-genesis is a gaming platform built on the mezo blockchain.."
                     />
 				</Head>
                 <title> MEZO-genesis ⚡🪙 </title>

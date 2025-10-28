@@ -13,7 +13,7 @@ const Scroll = () : JSX.Element => {
     const words:wordsInterface[]= [
         {
             character: "💫",
-            word : "Creating an incredible gaming experience on the polygon blockchain"
+            word : "Creating an incredible gaming experience on the mezo blockchain"
         },
         {
             character: "🔄",
@@ -53,7 +53,7 @@ const Scroll = () : JSX.Element => {
         },  
         {
             character: "💫",
-            word : "Creating An incredible gaming experience on the polygon blockchain"
+            word : "Creating An incredible gaming experience on the mezo blockchain"
         },   
         {
             character: "🎈",
@@ -73,13 +73,13 @@ const Scroll = () : JSX.Element => {
         },     
         {
             character: "💫",
-            word : "Creating An incredible gaming experience on the polygon blockchain"
+            word : "Creating An incredible gaming experience on the mezo blockchain"
         },
     ]
     return (
       <ScrollContainer>
        <ScrollTextHolder>
-           <Marquee gradient={true} speed={45} pauseOnClick={true} pauseOnHover={true}>
+           <Marquee gradient={false} speed={45} pauseOnClick={true} pauseOnHover={true}>
           {
               words.map((each, i) => (
                  <ScrollText key={i}>
