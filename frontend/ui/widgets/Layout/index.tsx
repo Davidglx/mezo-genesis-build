@@ -19,7 +19,7 @@ const Layout = ({ children, background }: { children: React.ReactNode, backgroun
 			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/first-mezo-wallie.jpg')"
 			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/first-wall-pap.jpeg')"
 			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/fimisile.jpg')"
-			backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/manner.jpg')"
+			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/manner.jpg')"
 
 
 
