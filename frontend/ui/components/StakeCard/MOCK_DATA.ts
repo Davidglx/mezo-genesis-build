@@ -6,7 +6,7 @@ import { StakeCardProps } from '.';
 // mock stake data
 export const mockData_StakeCardProps: StakeCardProps = {
 	show: false,
-	coin: 'matic',
+	coin: 'musd',
 	stake: '5',
 	result: '2',
 	stakes: ['1', '2', '5', '10', '20', '50'],
@@ -14,7 +14,7 @@ export const mockData_StakeCardProps: StakeCardProps = {
 	setStake: () => '',
 	onSpin: () => '',
 	again: () => '',
-	currencies: ['matic'],
+	currencies: ['musd'],
 	game: 'wheel',
 	connected: false,
 	spin: false,

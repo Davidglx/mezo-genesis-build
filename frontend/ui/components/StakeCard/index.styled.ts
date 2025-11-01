@@ -73,7 +73,41 @@ export const CardHead = styled.div`
 		}
 	}
 `;
+export const OutcomeWrapper = styled.div`
+	margin-top: 2em;
+	p {
+		font-family: ${({ theme }) => theme.fonts.Chopsic};
+		font-weight: 400;
+		font-size: 36px;
+		line-height: 41px;
+		color: white;
+	}
+	@media (max-width: 576.98px) {
+		p {
+			font-size: 20px;
+			line-height: 30px;
+		}
+	}
+`;
+
 //
+export const InputGroup = styled.div`
+	input {
+		display: none;
+	}
+	label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: ${({ theme }) => theme.fonts.Chopsic};
+		color: white;
+		height: 55px;
+		border: 1px solid #ff7f40;
+		border-radius: 5px;
+		margin-top: 1em;
+		cursor: pointer;
+	}
+`;
 export const CardBody = styled.div``;
 // button styling
 export const ActionButton = styled.div<{ inverse?: boolean }>`
@@ -168,5 +202,22 @@ export const ResultWrapper = styled.div`
 		color: #ff85fd;
 		padding-left: 0.5em;
 		text-transform: capitalize;
+	}
+`;
+
+export const ResultOutcome = styled.div`
+	margin-top: 2em;
+	p {
+		font-family: ${({ theme }) => theme.fonts.Chopsic};
+	}
+	p:nth-of-type(1) {
+		font-size: 26px;
+		@media (max-width: 576.98px) {
+			font-size: 20px;
+		}
+	}
+	p:nth-of-type(2) {
+		font-size: 14px;
+		margin-top: 1em;
 	}
 `;

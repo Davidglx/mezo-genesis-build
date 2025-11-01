@@ -26,7 +26,7 @@ const GameLayout = (props: GamesProps): JSX.Element => {
 	const [spin, setSpin] = useState(false);
 	const [show, setShow] = useState(false);
 	const [result, setResult] = useState('');
-	const [coin, setCoin] = useState('matic');
+	const [coin, setCoin] = useState('musd');
 	const [payout, setPayout]:any = useState(null);
 
 	const gameRef:any = useRef(null);
