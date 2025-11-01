@@ -7,6 +7,6 @@ import { CoinsProps } from '.';
 export const mockData_CoinsProps: CoinsProps = {
 	stakes: ['1', '2', '5', '10', '20', '50'],
 	items: ['head', 'tail'],
-	currencies: ['matic'],
+	currencies: ['musd'],
 	connected: true
 };

@@ -3,21 +3,25 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import walletReducer from './address/address.reducer';
+import resultReducer from "./result/result.reducer";
+import alertModalReducer from "./alert/alert.modal.reducer";
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['wallet'], // Only persist wallet state
+  whitelist: ['wallet'], 
 };
 
 const rootReducer = combineReducers({
-  wallet: walletReducer,
+  alert: alertModalReducer,
+  result: resultReducer,
+  wallet: walletReducer, 
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: persistedReducer, // Changed: use persistedReducer as the entire reducer
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

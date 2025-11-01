@@ -7,7 +7,7 @@ import { DiceProps } from '.';
 export const mockData_DiceProps: DiceProps = {
 	stakes: ['1', '2', '5', '10', '20', '50'],
 	items: ['head', 'tail'],
-	currencies: ['matic'],
+	currencies: ['musd'],
 	connected: true
 };
 
