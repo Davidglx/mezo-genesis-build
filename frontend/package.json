@@ -20,6 +20,7 @@
     "react-dom": "19.1.0",
     "react-fast-marquee": "^1.6.5",
     "react-redux": "^9.2.0",
+    "react-toastify": "^11.0.5",
     "sass": "^1.93.2",
     "styled-components": "^6.1.19",
     "styled-system": "^5.1.5",

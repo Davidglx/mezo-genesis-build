@@ -29,8 +29,8 @@ export const ScrollTextHolder = styled.div`
 
 export const ScrollText = styled.p`
 //    width: 10%;
-   font-size: 0.8rem;
-   font-weight: 500;
+   font-size: 1.2rem;
+   font-weight: 800;
    word-spacing: 4px;
    text-transform : uppercase;
    gap: 1rem;
@@ -38,7 +38,7 @@ export const ScrollText = styled.p`
    flex-direction: row;
    padding : 0px 30px;
    font-family: ${({ theme }) => theme.fonts.Inter};
-   color : white; 
+   color : red; 
 
    span:nth-child(2) {
     font-size: 0.6rem;
