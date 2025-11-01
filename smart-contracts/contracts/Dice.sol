@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract Dice is ReentrancyGuard {
@@ -26,20 +27,23 @@ contract Dice is ReentrancyGuard {
     }
     
     mapping(uint256 => DiceStatus) public statuses;
-    uint256 private requestCounter;
+    uint256 public requestCounter;
     uint256 private nonce;
     
     address public owner;
     uint256 public houseFee = 5;
+    IERC20 public musd;
     
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner");
         _;
     }
     
-    constructor() {
+    constructor(address _musdAddress) {
         owner = msg.sender;
         nonce = 0;
+        requestCounter = 0;
+        musd = IERC20(_musdAddress);
     }
     
     function getRandomNumber() private returns (uint256) {
@@ -47,21 +51,26 @@ contract Dice is ReentrancyGuard {
         return uint256(keccak256(abi.encodePacked(
             block.timestamp,
             block.prevrandao,
+            block.number,
             msg.sender,
-            nonce
+            nonce,
+            requestCounter
         )));
     }
     
-    function roll(DiceSelection choice) 
+    function roll(DiceSelection choice, uint256 betAmount) 
         external 
-        payable 
         nonReentrant
         returns (uint256) {
-        require(msg.value > 0, "Must send BTC to play");
-        require(msg.value <= address(this).balance / 10, "Bet too high");
+        require(betAmount > 0, "Must bet some MUSD");
+        require(betAmount <= getMUSDBalance().div(10), "Bet too high");
         
-        uint256 requestId = requestCounter++;
+        require(musd.transferFrom(msg.sender, address(this), betAmount), "MUSD transfer failed");
         
+        uint256 requestId = requestCounter;
+        requestCounter = requestCounter.add(1);
+        
+        // Generate TWO different random numbers for two dice
         uint256 random1 = getRandomNumber().mod(6).add(1);
         uint256 random2 = getRandomNumber().mod(6).add(1);
         uint256 total = random1.add(random2);
@@ -73,10 +82,10 @@ contract Dice is ReentrancyGuard {
             won = true;
         }
         
-        uint256 fees = msg.value.mul(houseFee).div(100);
+        uint256 fees = betAmount.mul(houseFee).div(100);
         
         statuses[requestId] = DiceStatus({
-            stakedAmount: msg.value,
+            stakedAmount: betAmount,
             fees: fees,
             randomWord1: random1,
             randomWord2: random2,
@@ -90,9 +99,8 @@ contract Dice is ReentrancyGuard {
         emit DiceResult(requestId, won, random1, random2, total);
         
         if (won) {
-            uint256 payout = msg.value.mul(2).sub(fees);
-            (bool success, ) = payable(msg.sender).call{value: payout}("");
-            require(success, "Transfer failed");
+            uint256 payout = betAmount.mul(2).sub(fees);
+            require(musd.transfer(msg.sender, payout), "Payout failed");
         }
         
         return requestId;
@@ -105,12 +113,13 @@ contract Dice is ReentrancyGuard {
         return statuses[requestId];
     }
     
-    function fundContract() external payable onlyOwner {}
+    function fundContract(uint256 amount) external onlyOwner {
+        require(musd.transferFrom(msg.sender, address(this), amount), "Funding failed");
+    }
     
     function withdraw(uint256 amount) external onlyOwner {
-        require(amount <= address(this).balance, "Insufficient balance");
-        (bool success, ) = payable(owner).call{value: amount}("");
-        require(success, "Withdrawal failed");
+        require(amount <= getMUSDBalance(), "Insufficient balance");
+        require(musd.transfer(owner, amount), "Withdrawal failed");
     }
     
     function setHouseFee(uint256 _fee) external onlyOwner {
@@ -118,11 +127,13 @@ contract Dice is ReentrancyGuard {
         houseFee = _fee;
     }
     
-    function getBalance() external view returns (uint256) {
-        return address(this).balance;
+    function getMUSDBalance() public view returns (uint256) {
+        return musd.balanceOf(address(this));
     }
     
-    receive() external payable {}
+    function getMUSDAddress() external view returns (address) {
+        return address(musd);
+    }
 }
 
 library SafeMath {

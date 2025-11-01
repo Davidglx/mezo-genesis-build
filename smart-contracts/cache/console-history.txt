@@ -1,3 +1,150 @@
+console.log("\n🎉 All contracts funded and ready to play!");
+console.log("   Wheel:", ethers.formatEther(await wheel.getMUSDBalance()), "MUSD");
+console.log("   Dice: ", ethers.formatEther(await dice.getMUSDBalance()), "MUSD");
+console.log("   Coin: ", ethers.formatEther(await coin.getMUSDBalance()), "MUSD");
+console.log("📊 Verifying balances...");
+console.log("   ✅ Funded Wheel\n");
+await tx3.wait();
+const tx3 = await wheel.fundContract(fundAmount);
+console.log("   ✅ Funded Dice");
+await tx2.wait();
+const tx2 = await dice.fundContract(fundAmount);
+console.log("   ✅ Funded Coin");
+await tx1.wait();
+const tx1 = await coin.fundContract(fundAmount);
+const fundAmount = ethers.parseEther("10");
+console.log("💰 Funding contracts with 10 MUSD each...");
+console.log("   ✅ Approved Wheel\n");
+await musd.approve(wheelAddress, approveAmount);
+console.log("   ✅ Approved Dice");
+await musd.approve(diceAddress, approveAmount);
+console.log("   ✅ Approved Coin");
+await musd.approve(coinAddress, approveAmount);
+const approveAmount = ethers.parseEther("1000");
+console.log("📝 Approving contracts...");
+console.log("   Balance:", ethers.formatEther(myBalance), "MUSD\n");
+const myBalance = await musd.balanceOf((await ethers.getSigners())[0].address);
+console.log("💰 Checking your MUSD balance...");
+const wheel = await ethers.getContractAt("Wheel", wheelAddress);
+const dice = await ethers.getContractAt("Dice", diceAddress);
+const coin = await ethers.getContractAt("Coin", coinAddress);
+const musd = await ethers.getContractAt("IERC20", musdAddress);
+// Get contracts
+const wheelAddress = "0x3ed7b683b255f7d866327ce31e4B17cEeAdE578f";
+const diceAddress = "0xA3Bc22C7250A81DE7fd60D8Dc61ac7E6434126a7";
+const coinAddress = "0xcdecCF70Dcee1B96dc7d2d146644EF48921A8201";
+const musdAddress = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+// Your new addresses
+/// npx hardhat console --network mezoTestnet
+console.log("\n🎉 All contracts funded and ready to play!");
+console.log("   Wheel:", ethers.formatEther(await wheel.getMUSDBalance()), "MUSD");
+console.log("   Dice: ", ethers.formatEther(await dice.getMUSDBalance()), "MUSD");
+console.log("   Coin: ", ethers.formatEther(await coin.getMUSDBalance()), "MUSD");
+console.log("📊 Verifying balances...");
+console.log("   ✅ Funded Wheel\n");
+await tx3.wait();
+const tx3 = await wheel.fundContract(fundAmount);
+console.log("   ✅ Funded Dice");
+await tx2.wait();
+const tx2 = await dice.fundContract(fundAmount);
+console.log("   ✅ Funded Coin");
+await tx1.wait();
+const tx1 = await coin.fundContract(fundAmount);
+const fundAmount = ethers.parseEther("10");
+console.log("💰 Funding contracts with 10 MUSD each...");
+console.log("   ✅ Approved Wheel\n");
+await musd.approve(wheelAddress, approveAmount);
+console.log("   ✅ Approved Dice");
+await musd.approve(diceAddress, approveAmount);
+console.log("   ✅ Approved Coin");
+await musd.approve(coinAddress, approveAmount);
+const approveAmount = ethers.parseEther("1000");
+console.log("📝 Approving contracts...");
+console.log("   Balance:", ethers.formatEther(myBalance), "MUSD\n");
+const myBalance = await musd.balanceOf((await ethers.getSigners())[0].address);
+console.log("💰 Checking your MUSD balance...");
+const wheel = await ethers.getContractAt("Wheel", wheelAddress);
+const dice = await ethers.getContractAt("Dice", diceAddress);
+const coin = await ethers.getContractAt("Coin", coinAddress);
+const musd = await ethers.getContractAt("IERC20", musdAddress);
+// Get contracts
+const wheelAddress = "0x3ed7b683b255f7d866327ce31e4B17cEeAdE578f";
+const diceAddress = "0xA3Bc22C7250A81DE7fd60D8Dc61ac7E6434126a7";
+const coinAddress = "0xcdecCF70Dcee1B96dc7d2d146644EF48921A8201";
+const musdAddress = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+// Your new addresses
+console.log("\n🎉 All contracts ready to play!");
+console.log("✅ Funded Wheel with 10 MUSD");
+await wheel.fundContract(fundAmount);
+console.log("✅ Funded Dice with 10 MUSD");
+await dice.fundContract(fundAmount);
+console.log("✅ Funded Coin with 10 MUSD");
+await coin.fundContract(fundAmount);
+const fundAmount = ethers.parseEther("10");
+// Fund
+console.log("✅ Approved Wheel");
+await musd.approve(wheelAddress, approveAmount);
+console.log("✅ Approved Dice");
+await musd.approve(diceAddress, approveAmount);
+console.log("✅ Approved Coin");
+await musd.approve(coinAddress, approveAmount);
+const approveAmount = ethers.parseEther("1000");
+// Approve
+console.log("My MUSD balance:", ethers.formatEther(myBalance), "MUSD");
+const myBalance = await musd.balanceOf((await ethers.getSigners())[0].address);
+// Check your balance
+const wheel = await ethers.getContractAt("Wheel", wheelAddress);
+const dice = await ethers.getContractAt("Dice", diceAddress);
+const coin = await ethers.getContractAt("Coin", coinAddress);
+const musd = await ethers.getContractAt("IERC20", musdAddress);
+const wheelAddress = "0xb1E9985a89565F4b863FDd4fdc4BCc7cB54de956";
+const diceAddress = "0x049509486CFF45cb836254f360103eB5FC51276C";
+const coinAddress = "0xB1FB3cB492638d8be9e9B1CEb334c35A425B3e98";
+const musdAddress = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+// New addresses
+console.log("   Wheel: ", ethers.formatEther(wheelBal), "MUSD");
+const wheelBal = await wheel.getMUSDBalance();
+console.log("   Dice:  ", ethers.formatEther(diceBal), "MUSD");
+const diceBal = await dice.getMUSDBalance();
+console.log("   Coin:  ", ethers.formatEther(coinBal), "MUSD");
+const coinBal = await coin.getMUSDBalance();
+console.log("\n📊 Contract Balances:");
+// Verify balances
+console.log("\n🎉 All contracts funded!");
+console.log("✅ Funded Wheel with 10 MUSD");
+await fundWheelTx.wait();
+const fundWheelTx = await wheel.fundContract(fundAmount);
+const wheel = await ethers.getContractAt("Wheel", wheelAddress);
+console.log("✅ Funded Dice with 10 MUSD");
+await fundDiceTx.wait();
+const fundDiceTx = await dice.fundContract(fundAmount);
+const dice = await ethers.getContractAt("Dice", diceAddress);
+console.log("✅ Funded Coin with 10 MUSD");
+await fundCoinTx.wait();
+const fundCoinTx = await coin.fundContract(fundAmount);
+const coin = await ethers.getContractAt("Coin", coinAddress);
+console.log("\n💰 Funding contracts...");
+const fundAmount = ethers.parseEther("10");
+// Fund each contract with MUSD (100 MUSD each)
+console.log("✅ Approved Wheel");
+await musd.approve(wheelAddress, approveAmount);
+console.log("✅ Approved Dice");
+await musd.approve(diceAddress, approveAmount);
+console.log("✅ Approved Coin");
+await musd.approve(coinAddress, approveAmount);
+console.log("\n📝 Approving contracts...");
+const approveAmount = ethers.parseEther("100");
+// Approve contracts to spend MUSD (approve 10 MUSD each)
+console.log("My MUSD balance:", ethers.formatEther(myBalance), "MUSD");
+const myBalance = await musd.balanceOf((await ethers.getSigners())[0].address);
+// Check your MUSD balance
+const musd = await ethers.getContractAt("IERC20", musdAddress);
+// Get MUSD contract
+const wheelAddress = "0x1A3c71f6C4baD5B7883221676e3998e8b2949a6C";
+const diceAddress = "0xE2FB0F0B7Aa79beaB3e5179ad13B6750f0aEa570";
+const coinAddress = "0xA7FF0855a85Aad216162D77f02C84Fe084da033A";
+const musdAddress = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+// Get contracts
 \que
 console.log("Result:", status.randomWord % 2n === 0n ? "TAILS" : "HEADS");
 console.log("Your choice:", status.choice === 0n ? "HEADS" : "TAILS");
