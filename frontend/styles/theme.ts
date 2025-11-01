@@ -160,11 +160,13 @@ const gradients: GradientType = {
  * Font Families
  */
 const fonts = {
-	primary: `'Roboto', sans-serif`,
+	primary: `Roboto Flex', sans-serif`,
 	Inter: `'Inter', sans-serif`,
-	Chopsic: `Chopsic`
+	Chopsic: `Chopsic`,
+	RobotoFlex: '"Roboto Flex", sans-serif',
 };
 
+export type ThemeType = typeof theme;
 /**
  * Font Sizes
  */

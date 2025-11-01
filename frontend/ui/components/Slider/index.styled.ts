@@ -1,58 +1,172 @@
-import styled from "styled-components";
+// index.styled.ts
+import styled from 'styled-components';
 
-export const SliderContainer = styled.div`
+export const Container = styled.div`
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+  padding: 80px 16px;
+`;
+
+export const Title = styled.h2`
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #111827;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+export const CarouselWrapper = styled.div`
   position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 300px; /* smaller section */
-  margin: 80px auto;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background: #f8f8f8;
+  max-width: 1280px;
+  margin: 64px auto 0;
 `;
 
-export const SlidesWrapper = styled.div<{ $current: number }>`
+export const GreenBackground = styled.div`
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 450px;
+  background: linear-gradient(to right, #bbf7d0, #86efac, #bbf7d0);
+  opacity: 0.5;
+  border-radius: 40px;
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    height: 420px;
+  }
+`;
+
+export const GradientLeft = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  background: linear-gradient(to right, #e2e8f0, transparent);
+  z-index: 10;
+  pointer-events: none;
+`;
+
+export const GradientRight = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  background: linear-gradient(to left, #e2e8f0, transparent);
+  z-index: 10;
+  pointer-events: none;
+`;
+
+export const ScrollContainer = styled.div`
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 32px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`;
+
+export const CardsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 500%; /* 5 slides stacked */
-  transform: ${({ $current }) => `translateY(-${$current * 100}%)`};
-  transition: transform 0.7s ease-in-out;
+  gap: 24px;
+  width: max-content;
 `;
 
-export const Slide = styled.div`
-  flex: 0 0 20%; /* 1/5 of total height */
+export const TestimonialCard = styled.div`
+  width: 240px;
+  min-width: 280px;
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    width: 280px;
+    min-width: 280px;
+    padding: 20px;
+  }
+`;
+
+
+export const StarsWrapper = styled.div`
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+`;
+
+export const TestimonialText = styled.p`
+  color: #4b5563;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: 32px;
+  min-height: 140px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    min-height: auto;
+  }
+`;
+
+export const AuthorInfo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-
-  &:nth-child(2) {
-    background: linear-gradient(135deg, #43cea2, #185a9d);
-  }
-  &:nth-child(3) {
-    background: linear-gradient(135deg, #ff9966, #ff5e62);
-  }
-  &:nth-child(4) {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-  }
-  &:nth-child(5) {
-    background: linear-gradient(135deg, #7f00ff, #e100ff);
-  }
+  gap: 16px;
 `;
 
-export const SlideContent = styled.div`
+export const Avatar = styled.img`
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px #d1fae5;
+`;
+
+export const AuthorDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AuthorName = styled.h4`
+  font-weight: bold;
+  color: #111827;
+  font-size: 1.125rem;
+  margin-bottom: 2px;
+`;
+
+export const AuthorRole = styled.p`
+  color: #6b7280;
+  font-size: 0.875rem;
+`;
+
+export const ScrollHint = styled.p`
   text-align: center;
-  padding: 30px;
-  h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-  }
-  p {
-    font-size: 0.95rem;
-    opacity: 0.9;
-  }
+  color: #9ca3af;
+  margin-top: 32px;
+  font-size: 0.875rem;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 `;

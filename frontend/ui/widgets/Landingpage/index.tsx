@@ -26,7 +26,7 @@ const Landingpage = (): JSX.Element => {
                     type="button"
                     onClick={setRedirect}
                 >
-                    <span>Enter</span>
+                    <span style={{  backgroundColor: "#f07a2d"}}>Enter</span>
                 </StartButton>
             </LandingpageComponent1>
 
