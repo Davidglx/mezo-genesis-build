@@ -6,6 +6,27 @@ import { createGlobalStyle } from 'styled-components';
 
 // styled components global styles
 export const GlobalStyle = createGlobalStyle`
+  /* Import Google Font */
+
+  .roboto-flex {
+    font-family: "Roboto Flex", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500; /* 👈 adjust as needed */
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0,
+      "wdth" 100,
+      "GRAD" 0,
+      "XOPQ" 96,
+      "XTRA" 468,
+      "YOPQ" 79,
+      "YTAS" 750,
+      "YTDE" -203,
+      "YTFI" 738,
+      "YTLC" 514,
+      "YTUC" 712;
+  }
+
   *,
   *:before,
   *:after {

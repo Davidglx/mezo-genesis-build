@@ -73,7 +73,7 @@ const Header = () => {
       <WalletSection>
         {!isConnected ? (
           <div className="dropdown">
-            <ConnectButton onClick={connectWallet}>
+            <ConnectButton className="roboto-flex" onClick={connectWallet}>
               Connect Wallet
             </ConnectButton>
           </div>

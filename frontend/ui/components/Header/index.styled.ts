@@ -136,14 +136,21 @@ export const WalletSection = styled.div`
   }
 `;
 
+
+
+  /* background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); */
+  /* font-family: ${({ theme }) => theme.fonts.Inter}; */
+
+
+
 export const ConnectButton = styled.button`
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+background-color: #f07a2d;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  font-family: ${({ theme }) => theme.fonts.Inter};
+  font-family: ${({ theme }) => theme.fonts.RobotoFlex};
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.2s;

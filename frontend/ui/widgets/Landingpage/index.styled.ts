@@ -24,7 +24,7 @@ export const LandingpageComponent1 =  styled.div`
     }  
   }
 
-  }
+  
   @media screen and (max-width: 1000px) {
     h1 {
       font-size: 2.5rem;
@@ -86,6 +86,8 @@ export const StartButton = styled.button`
     box-sizing: content-box;
     border: 2px solid transparent;
 
+
+
     &::before, &::after, span::before, span::after {
       display: block;
       content: "";
@@ -142,7 +144,8 @@ export const StartButton = styled.button`
   }
 
   span {
-    font-family: ${({ theme }) => theme.fonts.Chopsic};
+     font-family: ${({ theme }) => theme.fonts.Chopsic}; 
+
     border: 1px solid #FFFFFF;
     border-radius: 2px;
     padding: 1rem 6.2rem;
@@ -179,3 +182,4 @@ export const LandingpageComponent2 = styled.div`
    }
 
 `
+

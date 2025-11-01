@@ -16,7 +16,7 @@ export const Top = styled.div`
 		font-size: 18px;
 		letter-spacing: 1.99em;
 		text-transform: uppercase;
-		color: #ffffff;
+		color: green;
 		margin-bottom: 28px;
 	}
 	h1 {
@@ -24,7 +24,7 @@ export const Top = styled.div`
 		font-weight: 400;
 		font-size: 108px;
 		text-align: center;
-		color: #ffffff;
+		color: green;
 		/* margin-bottom: 0.5em; */
 	}
 	svg {
