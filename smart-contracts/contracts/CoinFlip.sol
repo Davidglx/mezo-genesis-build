@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract CoinFlip is ReentrancyGuard {
+contract Coin is ReentrancyGuard {
     using SafeMath for uint256;
     
     event CoinFlipRequest(uint256 indexed requestId, address indexed player);
@@ -25,20 +26,23 @@ contract CoinFlip is ReentrancyGuard {
     }
     
     mapping(uint256 => CoinFlipStatus) public statuses;
-    uint256 private requestCounter;
+    uint256 public requestCounter;
     uint256 private nonce;
     
     address public owner;
     uint256 public houseFee = 5;
+    IERC20 public musd;
     
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner");
         _;
     }
     
-    constructor() {
+    constructor(address _musdAddress) {
         owner = msg.sender;
         nonce = 0;
+        requestCounter = 0;
+        musd = IERC20(_musdAddress);
     }
     
     function getRandomNumber() private returns (uint256) {
@@ -46,20 +50,25 @@ contract CoinFlip is ReentrancyGuard {
         return uint256(keccak256(abi.encodePacked(
             block.timestamp,
             block.prevrandao,
+            block.number,
             msg.sender,
-            nonce
+            nonce,
+            requestCounter
         )));
     }
     
-    function flip(CoinFlipSelection choice) 
+    function flip(CoinFlipSelection choice, uint256 betAmount) 
         external 
-        payable 
         nonReentrant
         returns (uint256) {
-        require(msg.value > 0, "Must send BTC to play");
-        require(msg.value <= address(this).balance / 10, "Bet too high");
+        require(betAmount > 0, "Must bet some MUSD");
+        require(betAmount <= getMUSDBalance().div(10), "Bet too high");
         
-        uint256 requestId = requestCounter++;
+        require(musd.transferFrom(msg.sender, address(this), betAmount), "MUSD transfer failed");
+        
+        uint256 requestId = requestCounter;
+        requestCounter = requestCounter.add(1);
+        
         uint256 randomWord = getRandomNumber();
         
         CoinFlipSelection result = CoinFlipSelection.HEADS;
@@ -68,10 +77,10 @@ contract CoinFlip is ReentrancyGuard {
         }
         
         bool won = (choice == result);
-        uint256 fees = msg.value.mul(houseFee).div(100);
+        uint256 fees = betAmount.mul(houseFee).div(100);
         
         statuses[requestId] = CoinFlipStatus({
-            stakedAmount: msg.value,
+            stakedAmount: betAmount,
             fees: fees,
             randomWord: randomWord,
             player: msg.sender,
@@ -84,9 +93,8 @@ contract CoinFlip is ReentrancyGuard {
         emit CoinFlipResult(requestId, won, result);
         
         if (won) {
-            uint256 payout = msg.value.mul(2).sub(fees);
-            (bool success, ) = payable(msg.sender).call{value: payout}("");
-            require(success, "Transfer failed");
+            uint256 payout = betAmount.mul(2).sub(fees);
+            require(musd.transfer(msg.sender, payout), "Payout failed");
         }
         
         return requestId;
@@ -99,12 +107,13 @@ contract CoinFlip is ReentrancyGuard {
         return statuses[requestId];
     }
     
-    function fundContract() external payable onlyOwner {}
+    function fundContract(uint256 amount) external onlyOwner {
+        require(musd.transferFrom(msg.sender, address(this), amount), "Funding failed");
+    }
     
     function withdraw(uint256 amount) external onlyOwner {
-        require(amount <= address(this).balance, "Insufficient balance");
-        (bool success, ) = payable(owner).call{value: amount}("");
-        require(success, "Withdrawal failed");
+        require(amount <= getMUSDBalance(), "Insufficient balance");
+        require(musd.transfer(owner, amount), "Withdrawal failed");
     }
     
     function setHouseFee(uint256 _fee) external onlyOwner {
@@ -112,11 +121,13 @@ contract CoinFlip is ReentrancyGuard {
         houseFee = _fee;
     }
     
-    function getBalance() external view returns (uint256) {
-        return address(this).balance;
+    function getMUSDBalance() public view returns (uint256) {
+        return musd.balanceOf(address(this));
     }
     
-    receive() external payable {}
+    function getMUSDAddress() external view returns (address) {
+        return address(musd);
+    }
 }
 
 library SafeMath {
@@ -141,10 +152,5 @@ library SafeMath {
         uint256 c = a + b;
         require(c >= a, "SafeMath: addition overflow");
         return c;
-    }
-    
-    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-        require(b > 0, "SafeMath: modulo by zero");
-        return a % b;
     }
 }

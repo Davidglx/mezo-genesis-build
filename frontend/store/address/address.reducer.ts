@@ -1,34 +1,54 @@
-
-// importing relevant module
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ADDRESS_ACTION_TYPES } from './address.types';
 
-// user types
-interface addressTypes {
-   address :  any,
+interface WalletState {
+  address: string | null;
+  isConnected: boolean;
+  chainId: number | null;
+  balance: string | null;
+  musdBalance: string | null;
 }
 
-// initial state
-const initialState: addressTypes= {
-  address : null
-}
+const initialState: WalletState = {
+  address: null,
+  isConnected: false,
+  chainId: null,
+  balance: null,
+  musdBalance: null,
+};
 
-// setting address actions
-export const addressSlice= createSlice({
-  name: ADDRESS_ACTION_TYPES.ADDRESS_TYPE,
+const walletSlice = createSlice({
+  name: 'wallet',
   initialState,
-  reducers : {
-   setUserAddress : (state :any, action :PayloadAction<any>) => {
-    state.address = action.payload
-   },
-  
-  }
+  reducers: {
+    setWalletAddress: (state, action: PayloadAction<string>) => {
+      state.address = action.payload;
+      state.isConnected = true;
+    },
+    setChainId: (state, action: PayloadAction<number>) => {
+      state.chainId = action.payload;
+    },
+    setBalance: (state, action: PayloadAction<string>) => {
+      state.balance = action.payload;
+    },
+    setMusdBalance: (state, action: PayloadAction<string>) => {
+      state.musdBalance = action.payload;
+    },
+    disconnectWallet: (state) => {
+      state.address = null;
+      state.isConnected = false;
+      state.chainId = null;
+      state.balance = null;
+      state.musdBalance = null;
+    },
+  },
+});
 
-  
-})
+export const {
+  setWalletAddress,
+  setChainId,
+  setBalance,
+  setMusdBalance,
+  disconnectWallet,
+} = walletSlice.actions;
 
-// dispatch
-export const {setUserAddress} = addressSlice.actions
-
-// reducer
-export default addressSlice.reducer;
+export default walletSlice.reducer;

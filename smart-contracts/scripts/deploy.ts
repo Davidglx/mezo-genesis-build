@@ -2,7 +2,7 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("🎮 Deploying Mezo Contracts to Mezo Blockchain...\n");
+  console.log("🎮 Deploying MUSD-Powered Mezo genesis Contracts to Mezo...\n");
   console.log("=".repeat(60));
   
   const [deployer] = await hre.ethers.getSigners();
@@ -12,19 +12,23 @@ async function main() {
   console.log("💰 Account balance:", hre.ethers.formatEther(balance), "BTC");
   console.log("=".repeat(60) + "\n");
   
-  // Deploy CoinFlip
-  console.log("🪙 Deploying CoinFlip contract...");
-  const CoinFlip = await hre.ethers.getContractFactory("CoinFlip");
-  const coinFlip = await CoinFlip.deploy();
-  await coinFlip.waitForDeployment();
-  const coinFlipAddress = await coinFlip.getAddress();
-  console.log("✅ CoinFlip deployed to:", coinFlipAddress);
-  console.log("📝 Explorer:", `https://explorer.test.mezo.org/address/${coinFlipAddress}\n`);
+  // MUSD Testnet Address
+  const MUSD_TESTNET = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+  console.log("💵 MUSD Token:", MUSD_TESTNET, "\n");
+  
+  // Deploy Coin
+  console.log("🪙 Deploying Coin contract...");
+  const Coin = await hre.ethers.getContractFactory("Coin");
+  const coin = await Coin.deploy(MUSD_TESTNET);
+  await coin.waitForDeployment();
+  const coinAddress = await coin.getAddress();
+  console.log("✅ Coin deployed to:", coinAddress);
+  console.log("📝 Explorer:", `https://explorer.test.mezo.org/address/${coinAddress}\n`);
   
   // Deploy Dice
   console.log("🎲 Deploying Dice contract...");
   const Dice = await hre.ethers.getContractFactory("Dice");
-  const dice = await Dice.deploy();
+  const dice = await Dice.deploy(MUSD_TESTNET);
   await dice.waitForDeployment();
   const diceAddress = await dice.getAddress();
   console.log("✅ Dice deployed to:", diceAddress);
@@ -33,41 +37,29 @@ async function main() {
   // Deploy Wheel
   console.log("🎡 Deploying Wheel contract...");
   const Wheel = await hre.ethers.getContractFactory("Wheel");
-  const wheel = await Wheel.deploy();
+  const wheel = await Wheel.deploy(MUSD_TESTNET);
   await wheel.waitForDeployment();
   const wheelAddress = await wheel.getAddress();
   console.log("✅ Wheel deployed to:", wheelAddress);
   console.log("📝 Explorer:", `https://explorer.test.mezo.org/address/${wheelAddress}\n`);
   
-  // Fund contracts
-  const fundAmount = hre.ethers.parseEther("0.001");
-
-  console.log("💰 Funding contracts with 0.001 BTC each...");
-
-  const coinFlipFundTx = await coinFlip.fundContract({ value: fundAmount });
-  await coinFlipFundTx.wait();
-  console.log("✅ CoinFlip funded!");
-  
-  const diceFundTx = await dice.fundContract({ value: fundAmount });
-  await diceFundTx.wait();
-  console.log("✅ Dice funded!");
-  
-  const wheelFundTx = await wheel.fundContract({ value: fundAmount });
-  await wheelFundTx.wait();
-  console.log("✅ Wheel funded!\n");
-  
   console.log("=".repeat(60));
   console.log("🎉 DEPLOYMENT COMPLETE!");
   console.log("=".repeat(60));
   console.log("\n📋 Contract Addresses:\n");
-  console.log("   CoinFlip: ", coinFlipAddress);
-  console.log("   Dice:     ", diceAddress);
-  console.log("   Wheel:    ", wheelAddress);
+  console.log("   Coin:  ", coinAddress);
+  console.log("   Dice:  ", diceAddress);
+  console.log("   Wheel: ", wheelAddress);
   console.log("\n🔗 Save these addresses for your frontend!");
+  console.log("\n⚠️  NEXT STEPS:");
+  console.log("   1. Add MUSD token to MetaMask");
+  console.log("   2. Approve contracts to spend your MUSD");
+  console.log("   3. Fund contracts with MUSD");
+  console.log("   4. Test games!\n");
 }
 
 main()
-//@ts-ignore
+  //@ts-ignore
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);

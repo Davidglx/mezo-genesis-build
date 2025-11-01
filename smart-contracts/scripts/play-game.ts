@@ -1,96 +1,146 @@
 //@ts-ignore
 const hre = require("hardhat");
+
+// Helper function to delay
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 //@ts-ignore
 async function main() {
   const [player] = await hre.ethers.getSigners();
   
-  console.log("\n🎮 Testing Mezo genesis Games on Mezo Testnet\n");
+  console.log("\n🎮 Testing MEZO-Genesis Games on Mezo Testnet\n");
   console.log("Player address:", player.address);
   
   const balance = await hre.ethers.provider.getBalance(player.address);
-  console.log("Player balance:", hre.ethers.formatEther(balance), "BTC\n");
+  console.log("Player BTC balance:", hre.ethers.formatEther(balance), "BTC\n");
   
-  // Your deployed contract addresses
-  const coinFlipAddr = "0x7be5A01080F9593CF07E2C72f53B66F5E3C77fA1";
-  const diceAddr = "0xdC5C38f154E3b196A46d4052073706EB670F2Ae6";
-  const wheelAddr = "0xDAD35F89496987F4D585f20d98f694cea7FCf854";
+  // Contract addresses - 
+  const musdAddress = "0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503";
+  const coinAddress = "0xcdecCF70Dcee1B96dc7d2d146644EF48921A8201";
+  const diceAddress = "0xA3Bc22C7250A81DE7fd60D8Dc61ac7E6434126a7";
+  const wheelAddress = "0x3ed7b683b255f7d866327ce31e4B17cEeAdE578f";
   
-  // Connect to contracts
-  const CoinFlip = await hre.ethers.getContractFactory("CoinFlip");
-  const coinFlip = CoinFlip.attach(coinFlipAddr);
-  
+  // Get contracts
+  const musd = await hre.ethers.getContractAt("IERC20", musdAddress);
+  const Coin = await hre.ethers.getContractFactory("Coin");
+  const coin = Coin.attach(coinAddress);
   const Dice = await hre.ethers.getContractFactory("Dice");
-  const dice = Dice.attach(diceAddr);
-  
+  const dice = Dice.attach(diceAddress);
   const Wheel = await hre.ethers.getContractFactory("Wheel");
-  const wheel = Wheel.attach(wheelAddr);
+  const wheel = Wheel.attach(wheelAddress);
+  
+  // Check MUSD balance
+  const musdBalance = await musd.balanceOf(player.address);
+  console.log("💰 Your MUSD balance:", hre.ethers.formatEther(musdBalance), "MUSD\n");
   
   // Check contract balances
-  console.log("📊 Contract Balances:");
-  console.log("   CoinFlip:", hre.ethers.formatEther(await coinFlip.getBalance()), "BTC");
-  console.log("   Dice:    ", hre.ethers.formatEther(await dice.getBalance()), "BTC");
-  console.log("   Wheel:   ", hre.ethers.formatEther(await wheel.getBalance()), "BTC\n");
+  console.log("📊 Contract MUSD Balances:");
+  console.log("   Coin: ", hre.ethers.formatEther(await coin.getMUSDBalance()), "MUSD");
+  console.log("   Dice: ", hre.ethers.formatEther(await dice.getMUSDBalance()), "MUSD");
+  console.log("   Wheel:", hre.ethers.formatEther(await wheel.getMUSDBalance()), "MUSD\n");
   
-  const betAmount = hre.ethers.parseEther("0.0000001"); // 0.00002 BTC bet
+  const betAmount = hre.ethers.parseEther("1"); // 1 MUSD bet
   
-  // Test CoinFlip
-  console.log("🪙 Playing CoinFlip...");
-  console.log("   Betting:", hre.ethers.formatEther(betAmount), "BTC on HEADS");
-  const flipTx = await coinFlip.flip(0, { value: betAmount });
-  const flipReceipt = await flipTx.wait();
+  // Approve all contracts to spend MUSD
+  console.log("📝 Approving contracts to spend MUSD...");
+  const approveAmount = hre.ethers.parseEther("10"); // Approve 10 MUSD
+  await musd.approve(coinAddress, approveAmount);
+  await musd.approve(diceAddress, approveAmount);
+  await musd.approve(wheelAddress, approveAmount);
+  console.log("✅ All contracts approved!\n");
   
-  const flipRequestId = parseInt(flipReceipt.logs[0].topics[1]);
-  const flipStatus = await coinFlip.getStatus(flipRequestId);
+  await delay(2000); // Wait 2 seconds
   
+  // Test Coin
+  console.log("🪙 Playing Coin...");
+  console.log("   Betting:", hre.ethers.formatEther(betAmount), "MUSD on HEADS");
+  
+  const coinCounterBefore = await coin.requestCounter();
+  
+  const flipTx = await coin.flip(0, betAmount); // 0 = HEADS
+  await flipTx.wait();
+  
+  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${flipTx.hash}`);
+  
+  const flipRequestId = coinCounterBefore;
+  const flipStatus = await coin.getStatus(flipRequestId);
+  
+  console.log("   Your choice: HEADS");
   console.log("   Result:", flipStatus.randomWord % 2n === 0n ? "TAILS" : "HEADS");
-  console.log("   You", flipStatus.didWin ? "WON! 🎉" : "LOST 😢");
-  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${flipTx.hash}\n`);
+  console.log("   Random number:", flipStatus.randomWord.toString());
+  console.log("   You", flipStatus.didWin ? "WON! 🎉" : "LOST 😢\n");
+  
+  await delay(3000); // Wait 3 seconds between games
   
   // Test Dice
   console.log("🎲 Playing Dice...");
-  console.log("   Betting:", hre.ethers.formatEther(betAmount), "BTC on GREATER_THAN_6");
-  const rollTx = await dice.roll(0, { value: betAmount });
-  const rollReceipt = await rollTx.wait();
+  console.log("   Betting:", hre.ethers.formatEther(betAmount), "MUSD on GREATER_THAN_6");
   
-  const diceRequestId = parseInt(rollReceipt.logs[0].topics[1]);
+  const diceCounterBefore = await dice.requestCounter();
+  
+  const rollTx = await dice.roll(0, betAmount); // 0 = GREATERTHAN6
+  await rollTx.wait();
+  
+  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${rollTx.hash}`);
+  
+  const diceRequestId = diceCounterBefore;
   const diceStatus = await dice.getStatus(diceRequestId);
   
   console.log("   Roll 1:", diceStatus.randomWord1.toString());
   console.log("   Roll 2:", diceStatus.randomWord2.toString());
   console.log("   Total:", (diceStatus.randomWord1 + diceStatus.randomWord2).toString());
-  console.log("   You", diceStatus.didWin ? "WON! 🎉" : "LOST 😢");
-  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${rollTx.hash}\n`);
+  console.log("   Your bet: GREATER_THAN_6");
+  console.log("   You", diceStatus.didWin ? "WON! 🎉" : "LOST 😢\n");
+  
+  await delay(3000); // Wait 3 seconds between games
   
   // Test Wheel
   console.log("🎡 Playing Wheel...");
-  console.log("   Betting:", hre.ethers.formatEther(betAmount), "BTC");
-  const spinTx = await wheel.spin({ value: betAmount });
-  const spinReceipt = await spinTx.wait();
+  console.log("   Betting:", hre.ethers.formatEther(betAmount), "MUSD");
   
-  const wheelRequestId = parseInt(spinReceipt.logs[0].topics[1]);
+  const wheelCounterBefore = await wheel.requestCounter();
+  
+  const spinTx = await wheel.spin(betAmount);
+  await spinTx.wait();
+  
+  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${spinTx.hash}`);
+  
+  const wheelRequestId = wheelCounterBefore;
   const wheelStatus = await wheel.getStatus(wheelRequestId);
   
   const wheelNumber = wheelStatus.randomWord.toString();
   let wheelResult = "";
-  if (wheelNumber === "0" || wheelNumber === "4") wheelResult = "Break Even";
-  else if (wheelNumber === "1" || wheelNumber === "5") wheelResult = "2x WIN!";
-  else if (wheelNumber === "3") wheelResult = "Half Back";
+  if (wheelNumber === "0" || wheelNumber === "4") wheelResult = "Break Even (1x)";
+  else if (wheelNumber === "1" || wheelNumber === "5") wheelResult = "Big Win! (2x)";
+  else if (wheelNumber === "3") wheelResult = "Half Back (0.5x)";
   else wheelResult = "Lost";
   
   console.log("   Wheel landed on:", wheelNumber);
   console.log("   Result:", wheelResult);
-  console.log("   You", wheelStatus.didWin ? "WON! 🎉" : "LOST 😢");
-  console.log("   Transaction:", `https://explorer.test.mezo.org/tx/${spinTx.hash}\n`);
+  console.log("   Random number:", wheelStatus.randomWord.toString());
+  console.log("   You", wheelStatus.didWin ? "WON! 🎉" : "LOST 😢\n");
   
-  const finalBalance = await hre.ethers.provider.getBalance(player.address);
-  console.log("📊 Final player balance:", hre.ethers.formatEther(finalBalance), "BTC");
-  console.log("   Net change:", hre.ethers.formatEther(finalBalance - balance), "BTC\n");
+  await delay(2000); // Wait before final summary
   
-  console.log("✅ All games tested successfully!");
+  // Final balances
+  console.log("=".repeat(60));
+  const finalMusdBalance = await musd.balanceOf(player.address);
+  console.log("📊 Final MUSD balance:", hre.ethers.formatEther(finalMusdBalance), "MUSD");
+  console.log("   Net change:", hre.ethers.formatEther(finalMusdBalance - musdBalance), "MUSD\n");
+  
+  console.log("📊 Final Contract Balances:");
+  console.log("   Coin: ", hre.ethers.formatEther(await coin.getMUSDBalance()), "MUSD");
+  console.log("   Dice: ", hre.ethers.formatEther(await dice.getMUSDBalance()), "MUSD");
+  console.log("   Wheel:", hre.ethers.formatEther(await wheel.getMUSDBalance()), "MUSD");
+  console.log("=".repeat(60));
+  
+  console.log("\n✅ All MUSD games tested successfully!\n");
 }
 
 main()
-//@ts-ignore
+  //@ts-ignore
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);

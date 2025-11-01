@@ -1,341 +1,192 @@
-
-// // declaring global module
-// declare let window: any;
-
-// // importing stylings from styled-component
-// import {
-//   ConnectButton,
-//   HeaderContainer,
-//   SVGLogo,
-//   TextLogo,
-// } from "./index.styled";
-// import { AngleDownIcon } from "../../svgs";
-// // @ts-ignore
-// import { CopyToClipboard } from "react-copy-to-clipboard";
-// // @ts-ignore
-// import { UilCopy } from "@iconscout/react-unicons";
-
-// import { useEffect, useState } from "react";
-
-// // JSX Component
-// const Header = (): JSX.Element => {
-//   // temporarily removed Redux dispatch and selector
-//   const [address, setAddress] = useState<string | null>(null);
-//   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
-
-//   useEffect(() => {
-//     if (window.ethereum) {
-//       window.ethereum.on("accountsChanged", (accounts: string[]) => {
-//         if (accounts.length > 0) {
-//           setAddress(accounts[0]);
-//           localStorage.setItem("wallet-type", "metamask");
-//         }
-//       });
-//     }
-//   }, []);
-
-//   return (
-//     <HeaderContainer>
-//       <TextLogo href="/">
-//         {/* <img style={{ width: "12rem" }} src="/assets/mezo.svg" alt="" /> */}
-//         {/* <img style={{ width: "6rem" }} src="/assets/real-chip.png" alt="" /> */}
-//         {/* <img style={{ width: "6rem" }} src="/assets/casi-casi-new.png" alt="" /> */}
-//         <img style={{ width: "6rem" }} src="/assets/poker-chip.png" alt="" />
-
-
-//       </TextLogo>
-
-//       <SVGLogo href="/">
-//         <img src="/assets/svg-logo.svg" alt="" />
-//       </SVGLogo>
-
-//       <div className="dropdown">
-//         <ConnectButton style={{ cursor: address ? "unset" : "pointer" }}>
-//           {address ? (
-//             <span
-//               style={{
-//                 textTransform: "capitalize",
-//                 display: "flex",
-//                 alignItems: "center",
-//                 justifyContent: "center",
-//               }}
-//             >
-//               {address.substring(0, 5)}...
-//               {address.substring(38, 42)}
-//               <CopyToClipboard text={address}>
-//                 <span
-//                   style={{
-//                     margin: "0.2rem 0.1rem 0.1rem",
-//                     cursor: "pointer",
-//                   }}
-//                   onClick={() => {
-//                     setHandleCopyAddress(!handleCopyAddress);
-//                     setTimeout(() => {
-//                       setHandleCopyAddress(false);
-//                     }, 1000);
-//                   }}
-//                 >
-//                   {handleCopyAddress ? (
-//                     <img src="/assets/copy.png" style={{ width: "14px" }} />
-//                   ) : (
-//                     <UilCopy size="15" />
-//                   )}
-//                 </span>
-//               </CopyToClipboard>
-//             </span>
-//           ) : (
-//             "Connect Wallet"
-//           )}
-//           {!address && <AngleDownIcon size="20" />}
-//         </ConnectButton>
-//       </div>
-//     </HeaderContainer>
-//   );
-// };
-
-// export default Header;
-
-
-
-
-// // declaring global module
-// declare let window: any;
-
-// import { useEffect, useState } from "react";
-// import {
-//   ConnectButton,
-//   HeaderContainer,
-//   SVGLogo,
-//   TextLogo,
-// } from "./index.styled";
-// import { AngleDownIcon } from "../../svgs";
-// // @ts-ignore
-// import { CopyToClipboard } from "react-copy-to-clipboard";
-// // @ts-ignore
-// import { UilCopy } from "@iconscout/react-unicons";
-
-// import { metaMaskConnection, walletDisconnect } from "../../../utils/walletConnection";
-
-// const Header = (): JSX.Element => {
-//   const [address, setAddress] = useState<string | null>(null);
-//   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
-
-//   // detect account change
-//   useEffect(() => {
-//     if (window.ethereum) {
-//       window.ethereum.on("accountsChanged", (accounts: string[]) => {
-//         if (accounts.length > 0) {
-//           setAddress(accounts[0]);
-//           localStorage.setItem("wallet-type", "metamask");
-//         } else {
-//           setAddress(null);
-//         }
-//       });
-//     }
-//   }, []);
-
-//   return (
-//     <HeaderContainer>
-//       <TextLogo href="/">
-//         <img style={{ width: "6rem" }} src="/assets/poker-chip.png" alt="Mezo Logo" />
-//       </TextLogo>
-
-//       <SVGLogo href="/">
-//         <img src="/assets/svg-logo.svg" alt="SVG Logo" />
-//       </SVGLogo>
-
-//       <div className="dropdown">
-//         {/* Wallet Button */}
-//         <ConnectButton style={{ cursor: address ? "unset" : "pointer" }}>
-//           {address ? (
-//             <span
-//               style={{
-//                 textTransform: "capitalize",
-//                 display: "flex",
-//                 alignItems: "center",
-//                 justifyContent: "center",
-//               }}
-//             >
-//               {address.substring(0, 5)}...{address.substring(38, 42)}
-//               <CopyToClipboard text={address}>
-//                 <span
-//                   style={{
-//                     margin: "0.2rem 0.1rem 0.1rem",
-//                     cursor: "pointer",
-//                   }}
-//                   onClick={() => {
-//                     setHandleCopyAddress(true);
-//                     setTimeout(() => setHandleCopyAddress(false), 1000);
-//                   }}
-//                 >
-//                   {handleCopyAddress ? (
-//                     <img src="/assets/copy.png" style={{ width: "14px" }} />
-//                   ) : (
-//                     <UilCopy size="15" />
-//                   )}
-//                 </span>
-//               </CopyToClipboard>
-//             </span>
-//           ) : (
-//             "Connect Wallet"
-//           )}
-//           {!address && <AngleDownIcon size="20" />}
-//         </ConnectButton>
-
-//         {/* Dropdown options */}
-//         {!address ? (
-//           <div className="dropDownConnect__items">
-//             <div
-//               className="dropDownConnect_item"
-//               onClick={async () => {
-//                 const userAddress = await metaMaskConnection();
-//                 if (userAddress) setAddress(userAddress);
-//               }}
-//             >
-//               <div className="dropDownConnect_img">
-//                 <img src="/assets/metamask.png" alt="metamask logo" />
-//               </div>
-//               <p>MetaMask</p>
-//             </div>
-//           </div>
-//         ) : (
-//           <div className="dropDownConnect__items">
-//             <div
-//               className="dropDownConnect_item"
-//               onClick={() => {
-//                 walletDisconnect();
-//                 setAddress(null);
-//               }}
-//               style={{
-//                 background: "rgba(170, 74, 68, 0.6)",
-//                 borderRadius: "3px",
-//               }}
-//             >
-//               <div className="dropDownConnect_img">
-//                 <img src="/assets/cancel.png" alt="disconnect logo" />
-//               </div>
-//               <p
-//                 style={{
-//                   fontSize: "10px",
-//                 }}
-//                 className="disconnect"
-//               >
-//                 Disconnect wallet
-//               </p>
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </HeaderContainer>
-//   );
-// };
-
-// export default Header;
-
-
-
-
-// declaring global module
 declare let window: any;
 
+import { useState, useRef, useEffect } from 'react';
+import { useWallet } from '@/context/WalletContext'; 
+import { UilCopy } from '@iconscout/react-unicons';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   ConnectButton,
   HeaderContainer,
   SVGLogo,
   TextLogo,
-} from "./index.styled";
-import { AngleDownIcon } from "../../svgs";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { UilCopy } from "@iconscout/react-unicons";
-import { useEffect, useState } from "react";
+  WalletSection,
+  WalletInfo,
+  NetworkBadge,
+  BalanceCard,
+  BalanceLabel,
+  BalanceAmount,
+  AddressDropdown,
+  AddressButton,
+  DropdownMenu,
+  DropdownContent,
+  DropdownLabel,
+  DropdownAddress,
+  DisconnectButton,
+  BorrowNotice,
+} from './index.styled';
 
-const Header = (): JSX.Element => {
-  const [address, setAddress] = useState<string | null>(null);
+const Header = () => {
+  const { account, isConnected, balance, musdBalance, chainId, connectWallet, disconnectWallet } = useWallet();
   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
+  const [showBalanceDropdown, setShowBalanceDropdown] = useState(false);
+  const [showAddressDropdown, setShowAddressDropdown] = useState(false);
+  
+  const addressDropdownRef = useRef<HTMLDivElement>(null);
+  const balanceDropdownRef = useRef<HTMLDivElement>(null);
 
-  // 🧠 function to connect MetaMask
-  const connectWallet = async () => {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setAddress(accounts[0]);
-        localStorage.setItem("wallet-type", "metamask");
-      } catch (err) {
-        console.error("User rejected wallet connection:", err);
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (addressDropdownRef.current && !addressDropdownRef.current.contains(event.target as Node)) {
+        setShowAddressDropdown(false);
       }
-    } else {
-      alert("MetaMask not found. Please install it!");
-    }
+      if (balanceDropdownRef.current && !balanceDropdownRef.current.contains(event.target as Node)) {
+        setShowBalanceDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
-  // Listen for account changes
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts: string[]) => {
-        if (accounts.length > 0) {
-          setAddress(accounts[0]);
-          localStorage.setItem("wallet-type", "metamask");
-        } else {
-          setAddress(null);
-        }
-      });
-    }
-  }, []);
+  const formatBalance = (bal: string | null) => {
+    if (!bal) return '0.00';
+    return parseFloat(bal).toFixed(4);
+  };
+
+  const hasMUSD = musdBalance && parseFloat(musdBalance) > 0;
+  const isCorrectNetwork = chainId === 31611;
 
   return (
     <HeaderContainer>
       <TextLogo href="/">
-        <img style={{ width: "6rem" }} src="/assets/poker-chip.png" alt="" />
+        <img style={{ width: '6rem' }} src="/assets/poker-chip.png" alt="" />
       </TextLogo>
 
-      <SVGLogo href="/">
-        <img src="/assets/svg-logo.svg" alt="" />
-      </SVGLogo>
 
-      <div className="dropdown">
-        <ConnectButton
-          onClick={!address ? connectWallet : undefined}
-          style={{ cursor: address ? "unset" : "pointer" }}
-        >
-          {address ? (
-            <span
-              style={{
-                textTransform: "capitalize",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {address.substring(0, 5)}...{address.substring(38, 42)}
-              <CopyToClipboard text={address}>
-                <span
-                  style={{
-                    margin: "0.2rem 0.1rem 0.1rem",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setHandleCopyAddress(!handleCopyAddress);
-                    setTimeout(() => {
-                      setHandleCopyAddress(false);
-                    }, 1000);
-                  }}
+      <WalletSection>
+        {!isConnected ? (
+          <div className="dropdown">
+            <ConnectButton onClick={connectWallet}>
+              Connect Wallet
+            </ConnectButton>
+          </div>
+        ) : (
+          <WalletInfo>
+            {/* Network Badge
+            <NetworkBadge isCorrect={isCorrectNetwork}>
+              {isCorrectNetwork ? 'Mezo Testnet' : 'Wrong Network'}
+            </NetworkBadge> */}
+
+            {/* Balance - Click to toggle MUSD/BTC */}
+            <div style={{ position: 'relative' }} ref={balanceDropdownRef}>
+              <BalanceCard
+                onClick={() => setShowBalanceDropdown(!showBalanceDropdown)}
+                style={{ cursor: 'pointer' }}
+              >
+                <BalanceLabel>
+                  {hasMUSD ? 'MUSD Balance' : 'BTC Balance'}
+                </BalanceLabel>
+                <BalanceAmount>
+                  {hasMUSD ? formatBalance(musdBalance) + ' MUSD' : formatBalance(balance) + ' BTC'}
+                </BalanceAmount>
+              </BalanceCard>
+
+              {/* Balance Dropdown */}
+              {showBalanceDropdown && (
+                <DropdownMenu 
+                  className="balance-dropdown"
+                  style={{ display: 'block' }}
                 >
-                  {handleCopyAddress ? (
-                    <img src="/assets/copy.png" style={{ width: "14px" }} />
-                  ) : (
-                    <UilCopy size="15" />
-                  )}
-                </span>
-              </CopyToClipboard>
-            </span>
-          ) : (
-            "Connect Wallet"
-          )}
-          {!address && <AngleDownIcon size="20" />}
-        </ConnectButton>
-      </div>
+                  <DropdownContent>
+                    <DropdownLabel>BTC Balance</DropdownLabel>
+                    <DropdownAddress style={{ marginBottom: '0.5rem' }}>
+                      {formatBalance(balance)} BTC
+                    </DropdownAddress>
+                    
+                    <DropdownLabel>MUSD Balance</DropdownLabel>
+                    <DropdownAddress>
+                      {formatBalance(musdBalance)} MUSD
+                    </DropdownAddress>
+
+                    {!hasMUSD && (
+                      <BorrowNotice>
+                        💡 You need MUSD to play!<br />
+                        <a 
+                          href="https://testnet.mezo.org/faucet" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          Get MUSD from Faucet →
+                        </a>
+                      </BorrowNotice>
+                    )}
+                  </DropdownContent>
+                </DropdownMenu>
+              )}
+            </div>
+
+            {/* Address & Disconnect Dropdown */}
+            <AddressDropdown className="dropdown" ref={addressDropdownRef}>
+              <AddressButton onClick={() => setShowAddressDropdown(!showAddressDropdown)}>
+                {formatAddress(account!)}
+                <CopyToClipboard text={account!}>
+                  <span
+                    style={{
+                      margin: '0 0 0 0.5rem',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHandleCopyAddress(true);
+                      setTimeout(() => setHandleCopyAddress(false), 1000);
+                    }}
+                  >
+                    {handleCopyAddress ? (
+                      <img src="/assets/copy.png" style={{ width: '14px' }} alt="copied" />
+                    ) : (
+                      <UilCopy size="15" />
+                    )}
+                  </span>
+                </CopyToClipboard>
+              </AddressButton>
+
+              {showAddressDropdown && (
+                <DropdownMenu 
+                  className="dropDownConnect__items"
+                  style={{ display: 'block' }}
+                >
+                  <DropdownContent>
+                    <DropdownLabel>Connected</DropdownLabel>
+                    <DropdownAddress>{account}</DropdownAddress>
+                    <DisconnectButton 
+                      onClick={() => {
+                        disconnectWallet();
+                        setShowAddressDropdown(false);
+                      }}
+                    >
+                      {/* <img 
+                        src="/assets/cancel.png" 
+                        alt="disconnect" 
+                        style={{ width: '16px', marginRight: '8px' }}
+                      /> */}
+                      Disconnect
+                    </DisconnectButton>
+                  </DropdownContent>
+                </DropdownMenu>
+              )}
+            </AddressDropdown>
+          </WalletInfo>
+        )}
+      </WalletSection>
     </HeaderContainer>
   );
 };
