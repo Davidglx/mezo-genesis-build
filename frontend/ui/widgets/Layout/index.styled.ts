@@ -16,6 +16,7 @@ export const LayoutWrapper = styled(Container)`
 	background-size: cover;
 	background-position: center;
 	padding: 2em;
+	background-color: whitesmoke;
 	
 	@media screen and (max-width: 400px) {
 		padding: 2rem 1rem;

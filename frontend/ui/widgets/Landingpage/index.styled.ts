@@ -13,7 +13,8 @@ export const LandingpageComponent1 =  styled.div`
     font-family: ${({ theme }) => theme.fonts.Chopsic};
     font-weight: 400;
     font-size: 3rem;
-	  color: #ffffff;
+	  /* color: #ffffff; */
+    color: black;
     line-height: 4.5rem;
     inline-size: 40rem;
     overflow-wrap: break-word;
