@@ -16,7 +16,13 @@ const Layout = ({ children, background }: { children: React.ReactNode, backgroun
 		<LayoutWrapper style={{
 			// backgroundImage: background ? "url('/assets/pageBG.svg')" : "url('/assets/Landing.png')"
 			// backgroundImage: background ? "url('/assets/pageBG.svg')" : "url('/assets/first-mezo-wallie.jpg')"
-			backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/first-mezo-wallie.jpg')"
+			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/first-mezo-wallie.jpg')"
+			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/first-wall-pap.jpeg')"
+			// backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/fimisile.jpg')"
+			backgroundImage: background ? "url('/assets/new_wallie.png')" : "url('/assets/manner.jpg')"
+
+
+
 
 		}}>
 			 { !background &&  <Scroll/> }

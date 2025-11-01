@@ -79,7 +79,7 @@ const Scroll = () : JSX.Element => {
     return (
       <ScrollContainer>
        <ScrollTextHolder>
-           <Marquee gradient={false} speed={45} pauseOnClick={true} pauseOnHover={true}>
+           <Marquee gradient={false} speed={45} color={"green"} pauseOnClick={true} pauseOnHover={true}>
           {
               words.map((each, i) => (
                  <ScrollText key={i}>

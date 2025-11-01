@@ -2,6 +2,8 @@
 //importing relevant modules
 import Layout from '../ui/widgets/Layout'
 import Landingpage from '../ui/widgets/Landingpage';
+import Slider from '../ui/components/Slider';
+
 
 // JSX Component
 export default function Home() {
@@ -9,6 +11,7 @@ export default function Home() {
   return (
      <Layout background={setBackground}>
         <Landingpage />
+        <Slider />
      </Layout>
   )
 }
