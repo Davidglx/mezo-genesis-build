@@ -88,15 +88,6 @@ MEZO-Genesis solves these problems by:
 | **Wheel** | `0x3ed7b683b255f7d866327ce31e4B17cEeAdE578f` | Wheel spin game |
 | **MUSD** | `0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503` | Stablecoin token |
 
-<h1 align="center">
-    <br>
-    <a href="">
-        <img src="https://i.postimg.cc/CL4C3x0N/IMG-8098.jpg" alt="mezo blockchain" width="300"  />
-    </a>
-    <br>
-</h1>
-
-
 ---
 
 ## 🛠️ Project Structure

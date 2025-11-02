@@ -150,7 +150,7 @@ background-color: #f07a2d;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  font-family: ${({ theme }) => theme.fonts.Chopsic}; 
+  font-family: "RobotoFlex";
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.2s;
