@@ -183,3 +183,9 @@ export const LandingpageComponent2 = styled.div`
 
 `
 
+
+
+
+
+
+

@@ -2,15 +2,6 @@
 // declaring module typings in styled-components
 import 'styled-components';
 
-import {theme} from '@/styles/theme';
-
-type ThemeType = typeof theme;
-
-declare module 'styled-components' {
-  export interface DefaultTheme extends ThemeType {}
-}
-
-
 // and extend them!
 declare module 'styled-components' {
 	export interface BorderRadiusType {

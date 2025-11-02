@@ -17,7 +17,9 @@ export const GameContainer = styled.div`
 	}
 `;
 // both columns stylings
-export const FirstColumn = styled.div``;
+export const FirstColumn = styled.div`
+
+`;
 export const SecondColumn = styled.div`
 	background: linear-gradient(200.87deg, #7320ab 5.64%, #4a24aa 86.2%);
 	border-radius: 20px;
@@ -75,6 +77,7 @@ export const CardHead = styled.div`
 	}
 `;
 //
+
 export const CardBody = styled.div``;
 // button styling
 export const ActionButton = styled.div<{ inverse?: boolean }>`
@@ -92,6 +95,7 @@ export const ActionButton = styled.div<{ inverse?: boolean }>`
 	cursor: pointer;
 	font-size: 24px;
 	&:hover {
+		color: #ff7f40;
 		opacity: 0.9;
 	}
 	${({ inverse }) =>

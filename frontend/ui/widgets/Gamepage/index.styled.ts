@@ -24,7 +24,7 @@ export const Top = styled.div`
 		font-weight: 400;
 		font-size: 108px;
 		text-align: center;
-		color: green;
+			color: green;
 		/* margin-bottom: 0.5em; */
 	}
 	svg {
@@ -158,3 +158,7 @@ export const GameCard = styled.a`
 		}
 	}
 `;
+
+
+
+
