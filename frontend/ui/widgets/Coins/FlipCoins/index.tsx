@@ -17,7 +17,7 @@ const FlipCoins = ({
 }: {
 	setResult: (arg: string) => void;
 	spin: boolean;
-}): JSX.Element => {
+}) => {
 	// set result
 
 	const result = useSelector((state:RootState) => state.result.result)
@@ -52,7 +52,7 @@ const FlipCoins = ({
 			{!spin ? (
 				<>
 					<CoinsViewIcon />
-					<Typography variant="p">Coin toss</Typography>
+					<Typography variant="p" style={{color : "black"}}>Coin toss</Typography>
 				</>
 			) : (
 				<FlipCoin>

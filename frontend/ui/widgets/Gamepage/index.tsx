@@ -16,8 +16,12 @@ const Gamepage = (): JSX.Element => {
 	return (
 		<HomepageContainer>
 			<Top>
-				<Typography variant="h3">Welcome to</Typography>
-				<Typography variant="h1">MEZO-genesis</Typography>
+				<Typography variant="h3" style={{
+					color: "black"
+				}}>Welcome to</Typography>
+				<Typography variant="h1" style={{
+					color: "#F07A2D"
+				}}>MEZO-genesis</Typography>
 				<CircleDownArrow onClick={() => scrollToElement(gamesRef)} />
 			</Top>
 			<Bottom ref={gamesRef}>

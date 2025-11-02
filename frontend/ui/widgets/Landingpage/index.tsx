@@ -20,20 +20,21 @@ const Landingpage = (): JSX.Element => {
         <LandingpageContainer>
             <LandingpageComponent1>
                 <Typography variant="h1">
-                    creating an incredible <span style={{ color: "green" }}>Experience </span>on mezo
+                    creating an incredible <span style={{ color: "#F07A2D" }}>Experience </span>on mezo
                 </Typography>
                 <StartButton
                     type="button"
                     onClick={setRedirect}
                 >
-                    <span style={{  backgroundColor: "#f07a2d"}}>Enter</span>
+                    <span style={{  backgroundColor: "#f07a2d"}}>Start playing</span>
                 </StartButton>
             </LandingpageComponent1>
 
             <LandingpageComponent2>
                 {/* <img src="/assets/metaverse.png" alt="metaverse" /> */}
                 {/* <img src="/assets/new-work.png" alt="metaverse" /> */}
-                <img src="/assets/another-one.png" alt="metaverse" />
+                {/* <img src="/assets/another-one.png" alt="metaverse" /> */}
+                <img src="/assets/splash.svg" alt="metaverse" />
 
 
             </LandingpageComponent2>

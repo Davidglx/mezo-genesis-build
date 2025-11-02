@@ -18,18 +18,21 @@ const RollDice = ({
 }: {
 	setResult: (arg: string) => void;
 	spin: boolean;
-}): JSX.Element => {
+}) => {
 	
 // set result and faces
 	const result = useSelector((state:RootState) => state.result.result )
-	const faces = [
-		'https://svgshare.com/i/oZP.svg',
-		'https://svgshare.com/i/oZj.svg',
-		'https://svgshare.com/i/oYw.svg',
-		'https://svgshare.com/i/oZv.svg',
-		'https://svgshare.com/i/oZa.svg',
-		'https://svgshare.com/i/oZb.svg'
-	];
+
+
+const faces = [
+  'https://i.postimg.cc/QdbZ3Dt6/dice1.jpg',   
+  'https://i.postimg.cc/FHhwG6ZW/dice2.jpg',
+  'https://i.postimg.cc/X7kzZ8bY/dice3.jpg',
+  'https://i.postimg.cc/T2rkS9hj/dice4.jpg',
+  'https://i.postimg.cc/sx6G8qWD/dice5.jpg',
+  'https://i.postimg.cc/mZ5rvQqZ/dice6.jpg',
+];
+
 
 	const dice : MutableRefObject<null> | any= useRef(null);
 	const dice2 : MutableRefObject<null> | any = useRef(null);
@@ -42,7 +45,8 @@ const RollDice = ({
 	};
 	useEffect(() => {
 		if(spin) {
-			const res = Number(result.randomWord1) + Number(result.randomWord2);
+			const res = Number(result.roll1) + Number(result.roll2);
+			console.log(res, 'res');
 			setResult(res.toString());
 		}
 	}, [spin]);
@@ -55,6 +59,7 @@ const RollDice = ({
 
 	useEffect(() => {
 		console.log(result, 'result')
+		console.log(spin, 'spin')
 	})
 	// JSX building
 	return (
@@ -62,7 +67,9 @@ const RollDice = ({
 			{!spin ? (
 				<>
 					<DiceViewIcon />
-					<Typography variant="p">Roll Dice</Typography>
+					<Typography variant="p" style={{
+						color: "black"
+					}}>Roll Dice</Typography>
 				</>
 			) : (
 				<DiceRoll>
@@ -70,7 +77,7 @@ const RollDice = ({
 						ref={dice}
 						rollingTime={4000}
 						size={100}
-						cheatValue={result.randomWord1}
+						cheatValue={result.roll1}
 						// onRoll={(diceResult) => setDiceResult(diceResult)}
 						faces={faces}
 					/>
@@ -78,7 +85,7 @@ const RollDice = ({
 						ref={dice2}
 						size={100}
 						rollingTime={4000}
-						cheatValue={result.randomWord2}
+						cheatValue={result.roll2}
 						// defaultValue={dice2Result}
 						// onRoll={(dice2Result) => setDice2Result(dice2Result)}
 						faces={faces}

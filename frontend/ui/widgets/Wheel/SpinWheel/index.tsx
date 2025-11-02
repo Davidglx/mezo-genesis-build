@@ -76,7 +76,7 @@ const SpinWheel = ({
 					</WheelElement>
 				</div>
 			</SpinWrapper>
-			<Typography variant="p">Spin the wheel</Typography>
+			<Typography variant="p" style={{color : "black"}}>Spin the wheel</Typography>
 		</WheelWrapper>
 	);
 };

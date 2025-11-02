@@ -48,7 +48,7 @@ export interface StakeCardProps {
 	setPayout: (arg: number) => void;
 }
 
-const StakeCard = (props: StakeCardProps): JSX.Element => {
+const StakeCard = (props: StakeCardProps) => {
 	const {
 		show,
 		coin,
@@ -69,11 +69,10 @@ const StakeCard = (props: StakeCardProps): JSX.Element => {
 	const dispatch = useDispatch();
 	const { account, isConnected, musdBalance } = useWallet();
 
-	// Get result from Redux
-	const reduxResult = useSelector((state: RootState) => state.result?.result);
+
 
 	// Use reduxResult if available, otherwise use props.result
-	const displayResult = reduxResult || result;
+	const displayResult =  result;
 
 	const [txHash, setTxHash] = useState<string>('');
 	const [outcome, setOutcome] = useState<string[]>([]);
@@ -297,25 +296,19 @@ const StakeCard = (props: StakeCardProps): JSX.Element => {
 							gap: '0.5rem',
 						}}
 					>
-						<select
-							value={coin}
-							onChange={(e: ChangeEvent<HTMLSelectElement>) => setCoin(e.target.value)}
-							disabled={spin}
-							style={{
-								background: 'transparent',
-								color: 'white',
-								border: '1px solid #FF7F40',
-								padding: '0.5rem',
-								borderRadius: '4px',
-							}}
-						>
-							{currencies.map((currency) => (
-								<option key={currency} value={currency}>
-									{currency}
-								</option>
-							))}
-						</select>
-						<img src="/assets/matic1.png" alt="currency" style={{ width: '1.5rem' }} />
+						<Typography variant="p" style={{
+							fontSize : "14px",
+							 border: "solid 1px #F07A2D", 
+							 borderRadius: "6px",
+							  display: "flex", 
+							  gap:"6px", 
+							  alignItems: "center",
+							  padding: "4px 8px",
+							  }}>
+						 MUSD
+					    <img src="/assets/mezoicon.svg" alt="currency" style={{ width: '1.5rem' }} />
+						</Typography>
+
 					</div>
 				) : (
 					<SelectedStake>{stake}</SelectedStake>
@@ -401,10 +394,10 @@ const StakeCard = (props: StakeCardProps): JSX.Element => {
 							>
 								payment: {payout} {coin}
 								<img
-									src="/assets/matic1.png"
+									src="/assets/mezoicon.svg"
 									style={{
-										width: '2rem',
-										marginLeft: '-5px',
+										width: '1.2rem',
+										marginLeft: '2px',
 									}}
 									alt="coin"
 								/>
