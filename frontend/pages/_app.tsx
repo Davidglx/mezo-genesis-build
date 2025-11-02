@@ -6,6 +6,8 @@ import { WalletProvider } from '@/context/WalletContext';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store/store';
+import { ToastContainer, Slide } from 'react-toastify';
+
 import '../styles/sass/main.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,6 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PersistGate loading={null} persistor={persistor}>
         <WalletProvider>
           <ThemeProvider theme={theme}>
+            <ToastContainer
+              closeOnClick={true}
+              pauseOnHover={true}
+              autoClose={6000}
+              hideProgressBar={true}
+              draggable={false}
+              limit={2}
+              transition={Slide} />
             <GlobalStyle />
             <Component {...pageProps} />
           </ThemeProvider>

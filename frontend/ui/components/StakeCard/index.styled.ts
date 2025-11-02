@@ -110,7 +110,7 @@ export const InputGroup = styled.div`
 `;
 export const CardBody = styled.div``;
 // button styling
-export const ActionButton = styled.div<{ inverse?: boolean }>`
+export const ActionButton = styled.div<{ inverse?: boolean, spin?: boolean; onClick: any; disabled: any }>`
 	background: #ff7f40;
 	box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
@@ -134,6 +134,21 @@ export const ActionButton = styled.div<{ inverse?: boolean }>`
     border: 1px solid #ff7f40;
     background: transparent;
     `}
+
+		${({ spin }) =>
+		spin &&
+		`
+		    color: gray;
+    border: 1px solid gray;
+    background: transparent;
+	`}
+	${({ disabled}) =>
+     disabled &&
+	`
+		color: gray;
+border: 1px solid gray;
+background: transparent;
+`}
 	@media (max-width: 576.98px) {
 		height: 40px;
 		margin-top: 1em;

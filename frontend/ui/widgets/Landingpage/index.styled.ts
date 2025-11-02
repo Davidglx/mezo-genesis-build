@@ -149,9 +149,15 @@ export const StartButton = styled.button`
   // }
 
   span {
-     font-family: ${({ theme }) => theme.fonts.Chopsic}; 
-
+     font-family: "RobotoFlex";
+     text-transform: uppercase;
     border: 1px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1rem;
     border-radius: 8px;
     padding: 1rem 6.2rem;
     background: rgba(217, 217, 217, 0.2)

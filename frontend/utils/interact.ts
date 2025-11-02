@@ -8,6 +8,7 @@ import { setResult } from "../store/result/result.reducer";
 import coinContractABI from '../abis/Coin.json';
 import diceContractABI from '../abis/Dice.json';
 import wheelContractABI from '../abis/Wheel.json';
+import { successToast } from "./toast";
 
 // MUSD Contract ABI (minimal)
 const MUSD_ABI = [
@@ -135,7 +136,7 @@ export const getRequestId = async (choice: number) => {
 
 export const getResult = async (id: number, dispatch: Dispatch<AnyAction>) => {
   try {
-    console.log("🔍 Getting coin flip result for ID:", id);
+    // console.log("🔍 Getting coin flip result for ID:", id);
     const { provider } = await getProviderAndSigner();
     const abi = coinContractABI.abi || coinContractABI;
     const coinContract = new ethers.Contract(
@@ -148,16 +149,17 @@ export const getResult = async (id: number, dispatch: Dispatch<AnyAction>) => {
     
     // The actual coin result (what the coin landed on)
     const coinResult = status.randomWord % 2n === 0n ? 'tails' : 'heads';
+    successToast("🪙 Coin flip result is in!");
     
-    console.log('🎲 Coin Flip Result:', {
-      requestId: id,
-      randomWord: status.randomWord.toString(),
-      result: coinResult,
-      yourChoice: status.choice === 0 ? 'heads' : 'tails',
-      didWin: status.didWin,
-      stakedAmount: ethers.formatEther(status.stakedAmount),
-      fees: ethers.formatEther(status.fees)
-    });
+    // console.log('🎲 Coin Flip Result:', {
+    //   requestId: id,
+    //   randomWord: status.randomWord.toString(),
+    //   result: coinResult,
+    //   yourChoice: status.choice === 0 ? 'heads' : 'tails',
+    //   didWin: status.didWin,
+    //   stakedAmount: ethers.formatEther(status.stakedAmount),
+    //   fees: ethers.formatEther(status.fees)
+    // });
     
     // Dispatch the simple string result
     dispatch(setResult({
@@ -383,7 +385,14 @@ export const getWheelResult = async (id: number, dispatch: Dispatch<AnyAction>) 
     
     // Return the multiplier as a string
     const result = multiplier.toString();
-    dispatch(setResult(result));
+    dispatch(setResult({
+      requestId: id,
+      wheelNumber,
+      multiplier,
+      didWin: status.didWin,
+      stakedAmount: ethers.formatEther(status.stakedAmount),
+      fees: ethers.formatEther(status.fees)
+    }));
     return result;
   } catch (error) {
     console.error("❌ Error getting wheel result:", error);
