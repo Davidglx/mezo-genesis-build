@@ -3,7 +3,9 @@
 // importing  styled module
 import styled from 'styled-components';
 
-export const HomepageContainer = styled.div``;
+export const HomepageContainer = styled.div`
+
+`;
 
 /// Top stylings
 export const Top = styled.div`

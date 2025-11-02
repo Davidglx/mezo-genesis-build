@@ -160,7 +160,15 @@ export const getResult = async (id: number, dispatch: Dispatch<AnyAction>) => {
     });
     
     // Dispatch the simple string result
-    dispatch(setResult(coinResult));
+    dispatch(setResult({
+      requestId: id,
+      randomWord: status.randomWord.toString(),
+      result: coinResult,
+      yourChoice: status.choice === 0 ? 'heads' : 'tails',
+      didWin: status.didWin,
+      stakedAmount: ethers.formatEther(status.stakedAmount),
+      fees: ethers.formatEther(status.fees)
+    }));
     return coinResult;
   } catch (error) {
     console.error("❌ Error getting result:", error);
@@ -264,7 +272,16 @@ export const getDiceResult = async (id: number, dispatch: Dispatch<AnyAction>) =
     
     // Return the total as a string
     const result = total.toString();
-    dispatch(setResult(result));
+    dispatch(setResult({
+      requestId: id,
+      roll1,
+      roll2,
+      total,
+      yourChoice: status.choice === 0 ? 'greater than 6' : 'less than 6',
+      didWin: status.didWin,
+      stakedAmount: ethers.formatEther(status.stakedAmount),
+      fees: ethers.formatEther(status.fees)
+    }));
     return result;
   } catch (error) {
     console.error("❌ Error getting dice result:", error);

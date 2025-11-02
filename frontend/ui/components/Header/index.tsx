@@ -1,7 +1,7 @@
 declare let window: any;
 
 import { useState, useRef, useEffect } from 'react';
-import { useWallet } from '@/context/WalletContext'; 
+import { useWallet } from '@/context/WalletContext';
 import { UilCopy } from '@iconscout/react-unicons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
@@ -30,7 +30,7 @@ const Header = () => {
   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
   const [showBalanceDropdown, setShowBalanceDropdown] = useState(false);
   const [showAddressDropdown, setShowAddressDropdown] = useState(false);
-  
+
   const addressDropdownRef = useRef<HTMLDivElement>(null);
   const balanceDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -79,8 +79,8 @@ const Header = () => {
           </div>
         ) : (
           <WalletInfo>
-            {/* Network Badge
-            <NetworkBadge isCorrect={isCorrectNetwork}>
+            {/* Network Badge */}
+            {/* <NetworkBadge isCorrect={isCorrectNetwork}>
               {isCorrectNetwork ? 'Mezo Testnet' : 'Wrong Network'}
             </NetworkBadge> */}
 
@@ -94,33 +94,56 @@ const Header = () => {
                   {hasMUSD ? 'MUSD Balance' : 'BTC Balance'}
                 </BalanceLabel>
                 <BalanceAmount>
-                  {hasMUSD ? formatBalance(musdBalance) + ' MUSD' : formatBalance(balance) + ' BTC'}
+                  {hasMUSD ? formatBalance(musdBalance) : formatBalance(balance)}
+                  {hasMUSD ?
+                    <img
+                      src="/assets/mezoicon.svg"
+                      alt="MUSD"
+                      style={{ width: '16px', marginLeft: '0.3rem', verticalAlign: 'middle' }}
+                    />
+                    :
+                    <img
+                      src="/assets/bitcoin.webp"
+                      alt="BTC"
+                      style={{ width: '14px', marginLeft: '0.3rem', verticalAlign: 'middle' }}
+                    />
+                  }
                 </BalanceAmount>
               </BalanceCard>
 
               {/* Balance Dropdown */}
               {showBalanceDropdown && (
-                <DropdownMenu 
+                <DropdownMenu
                   className="balance-dropdown"
                   style={{ display: 'block' }}
                 >
                   <DropdownContent>
                     <DropdownLabel>BTC Balance</DropdownLabel>
                     <DropdownAddress style={{ marginBottom: '0.5rem' }}>
-                      {formatBalance(balance)} BTC
+                      {formatBalance(balance)}
+                      <img
+                        src="/assets/bitcoin.webp"
+                        alt="BTC"
+                        style={{ width: '16px', marginLeft: '0.3rem', verticalAlign: 'middle' }}
+                      />
                     </DropdownAddress>
-                    
+
                     <DropdownLabel>MUSD Balance</DropdownLabel>
                     <DropdownAddress>
-                      {formatBalance(musdBalance)} MUSD
+                      {formatBalance(musdBalance)}
+                      <img
+                        src="/assets/mezoicon.svg"
+                        alt="MUSD"
+                        style={{ width: '16px', marginLeft: '0.3rem', verticalAlign: 'middle' }}
+                      />
                     </DropdownAddress>
 
                     {!hasMUSD && (
                       <BorrowNotice>
                         💡 You need MUSD to play!<br />
-                        <a 
-                          href="https://testnet.mezo.org/faucet" 
-                          target="_blank" 
+                        <a
+                          href="https://testnet.mezo.org/faucet"
+                          target="_blank"
                           rel="noopener noreferrer"
                         >
                           Get MUSD from Faucet →
@@ -160,14 +183,14 @@ const Header = () => {
               </AddressButton>
 
               {showAddressDropdown && (
-                <DropdownMenu 
+                <DropdownMenu
                   className="dropDownConnect__items"
                   style={{ display: 'block' }}
                 >
                   <DropdownContent>
                     <DropdownLabel>Connected</DropdownLabel>
                     <DropdownAddress>{account}</DropdownAddress>
-                    <DisconnectButton 
+                    <DisconnectButton
                       onClick={() => {
                         disconnectWallet();
                         setShowAddressDropdown(false);

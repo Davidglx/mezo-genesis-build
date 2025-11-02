@@ -74,80 +74,85 @@ export const LandingpageComponent1 =  styled.div`
 
 export const StartButton = styled.button`
     position: relative;
-    width: 16rem;
+    width: 100%;
     height: 3rem;
     margin-top: 1rem;
     // margin: 20px;
     background: none;
+    border-radius : 20px;
     border: none;
     cursor: pointer;
     color: white;
     padding: 0;
     box-sizing: content-box;
     border: 2px solid transparent;
+    align-items: start;
+    justify-content: start;
+    display: flex
+;
 
 
 
-    &::before, &::after, span::before, span::after {
-      display: block;
-      content: "";
-      width: 20px;
-      height: 20px;
-      position: absolute;
-  }
+  //   &::before, &::after, span::before, span::after {
+  //     display: block;
+  //     content: "";
+  //     width: 20px;
+  //     height: 20px;
+  //     position: absolute;
+  // }
   
-  &::before {
-      top: -2px;
-      left: -2px;
-      width: 0.9rem;
-      height: 0.5rem;
-      border-top: 2px solid white !important;
-      border-left: 2px solid white !important;
-      transition: 0.5s all;
-  }
-  &::after {
-      top: -2px;
-      right: -2px;
-      width: 0.9rem;
-      height: 0.5rem;
-      border-top: 2px solid white;
-      border-right: 2px solid white;
-      transition: 0.5s all;
-  }
-  span::before {
-      bottom: -2px;
-      left: -2px;
-      width: 0.9rem;
-      height: 0.5rem;
-      border-bottom: 2px solid white;
-      border-left: 2px solid white;
-      transition: 0.5s all;
-  }
-  span::after {
-      bottom: -2px;
-      right: -2px;
-      width: 0.9rem;
-      height: 0.5rem;
-      border-bottom: 2px solid white;
-      border-right: 2px solid white;
-      transition: 0.5s all;
-  }
+  // &::before {
+  //     top: -2px;
+  //     left: -2px;
+  //     width: 0.9rem;
+  //     height: 0.5rem;
+  //     border-top: 2px solid white !important;
+  //     border-left: 2px solid white !important;
+  //     transition: 0.5s all;
+  // }
+  // &::after {
+  //     top: -2px;
+  //     right: -2px;
+  //     width: 0.9rem;
+  //     height: 0.5rem;
+  //     border-top: 2px solid white;
+  //     border-right: 2px solid white;
+  //     transition: 0.5s all;
+  // }
+  // span::before {
+  //     bottom: -2px;
+  //     left: -2px;
+  //     width: 0.9rem;
+  //     height: 0.5rem;
+  //     border-bottom: 2px solid white;
+  //     border-left: 2px solid white;
+  //     transition: 0.5s all;
+  // }
+  // span::after {
+  //     bottom: -2px;
+  //     right: -2px;
+  //     width: 0.9rem;
+  //     height: 0.5rem;
+  //     border-bottom: 2px solid white;
+  //     border-right: 2px solid white;
+  //     transition: 0.5s all;
+  // }
   
-  &:hover::before, &:hover::after {
-      width: 0px;
-      height: 0px;
-  }
+  // &:hover::before, &:hover::after {
+  //     width: 0px;
+  //     height: 0px;
+  // }
   
-  &:hover span::before, &:hover span::after {
-      width: 0px;
-      height: 0px;
-  }
+  // &:hover span::before, &:hover span::after {
+  //     width: 0px;
+  //     height: 0px;
+  // }
 
   span {
      font-family: ${({ theme }) => theme.fonts.Chopsic}; 
 
     border: 1px solid #FFFFFF;
-    border-radius: 2px;
+    border-radius: 8px;
     padding: 1rem 6.2rem;
     background: rgba(217, 217, 217, 0.2)
   }

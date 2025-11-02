@@ -29,7 +29,7 @@ export const HeaderWrapper = styled.header``;
 // main style component
 export const Main = styled.div`
 	flex: 1 0 auto;
-	/* margin: auto; */
+	// margin: auto; 
 	margin-top: 4em;
 	/* trying to avoid "%" based container width in order to have a pixel perfect left/right spacing. Use padding/margin if need less width. */
 	/* width: 95%; */

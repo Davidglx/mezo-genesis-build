@@ -210,6 +210,7 @@ export const BalanceCard = styled.div`
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 
+
   @media (max-width: 576.98px) {
     padding: 0.4rem 0.7rem;
   }
@@ -231,6 +232,9 @@ export const BalanceAmount = styled.div`
   font-weight: bold;
   font-size: 0.9rem;
   font-family: ${({ theme }) => theme.fonts.Inter};
+  display: flex;
+  align-items: center;
+  
 
   @media (max-width: 576.98px) {
     font-size: 0.75rem;
@@ -239,6 +243,7 @@ export const BalanceAmount = styled.div`
 
 export const AddressDropdown = styled.div`
   position: relative;
+  // right: 0;
 `;
 
 export const AddressButton = styled.button`
@@ -288,6 +293,7 @@ export const DropdownMenu = styled.div`
 
   @media (max-width: 576.98px) {
     min-width: 180px;
+    right: unset;
   }
 `;
 
