@@ -29,6 +29,7 @@ import {
 	SelectedStake,
 	StakeGroup,
 } from './index.styled';
+import { errorToast, infoToast, promiseToast } from '@/utils/toast';
 
 export interface StakeCardProps {
 	show: boolean;
@@ -148,46 +149,51 @@ const StakeCard = (props: StakeCardProps) => {
 
 		// Check wallet connection
 		if (!isConnected || !account) {
-			dispatch(alert('Please connect your wallet'));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+			// dispatch(alert('Please connect your wallet'));
+			errorToast('Please connect your wallet')
+			// setTimeout(() => {
+			// 	dispatch(close(''));
+			// }, 2000);
 			return;
 		}
 
 		// Check MUSD balance
 		if (!musdBalance || parseFloat(musdBalance) === 0) {
-			dispatch(alert('You need MUSD to play! Get it from the faucet.'));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+            errorToast('You need MUSD to play! Get it from the faucet.');
+			// dispatch(alert('You need MUSD to play! Get it from the faucet.'));
+			// setTimeout(() => {
+			// 	dispatch(close(''));
+			// }, 2000);
 			return;
 		}
 
 		// Check if MUSD balance is sufficient
 		if (parseFloat(musdBalance) < parseFloat(stake)) {
-			dispatch(alert('Insufficient MUSD balance'));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+			// dispatch(alert('Insufficient MUSD balance'));
+			// setTimeout(() => {
+			// 	dispatch(close(''));
+			// }, 2000);
+			errorToast('Insufficient MUSD balance');
 			return;
 		}
 
 		// Check stake amount
 		if (!stake.length) {
-			dispatch(alert('Select an amount'));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+			errorToast('Select an amount');
+			// dispatch(alert('Select an amount'));
+			// setTimeout(() => {
+			// 	dispatch(close(''));
+			// }, 2000);
 			return;
 		}
 
 		// Check chosen outcome (not for wheel)
 		if (game !== 'wheel' && !chosenOutcome.length) {
-			dispatch(alert('Place a bet'));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+			errorToast('Place a bet');
+			// dispatch(alert('Place a bet'));
+			// setTimeout(() => {
+			// 	dispatch(close(''));
+			// }, 2000);
 			return;
 		}
 
@@ -197,86 +203,90 @@ const StakeCard = (props: StakeCardProps) => {
 			// COINS
 			if (game === 'coins') {
 				const bet: number = chosenOutcome.includes('head') ? 0 : 1; // 0 = HEADS, 1 = TAILS
-				dispatch(alert('Processing transaction... 🔂'));
+				// dispatch(alert('Processing transaction... 🔂'));
+				infoToast('Processing transaction... 🔂');
 
 				const result = await flip(bet, Number(stake), account);
 
 				if (result.hash) {
 					setTxHash(result.hash);
-					dispatch(alert('Processing transaction blocks... ⌛️'));
+					infoToast('Processing transaction blocks... ⌛️');
+					// dispatch(alert('Processing transaction blocks... ⌛️'));
 
-					setTimeout(async () => {
+					// setTimeout(async () => {
 						const id = await getRequestId(bet);
 						await getResult(id, dispatch);
 						onSpin();
 						setDisabled(false);
-						dispatch(close(''));
-					}, 10000); // 10 seconds for Mezo
+						// dispatch(close(''));
+					// }, 10000); // 10 seconds for Mezo
 				} else {
-					dispatch(alert('😰 Error: ' + result.status));
-					setTimeout(() => {
-						dispatch(close(''));
-					}, 2000);
-					setDisabled(false);
+					errorToast('😰 Error: ' + result.status);
+					// dispatch(alert('😰 Error: ' + result.status));
+					// setTimeout(() => {
+					// 	dispatch(close(''));
+					// }, 2000);
+					// setDisabled(false);
 				}
 			}
 			// DICE
 			else if (game === 'dice') {
 				const bet: number = chosenOutcome.includes('greater') ? 0 : 1;
-				dispatch(alert('Processing transaction... 🔂'));
+				// dispatch(alert('Processing transaction... 🔂'));
+				infoToast('Processing transaction... 🔂');
 
 				const result = await roll(bet, Number(stake), account);
 
 				if (result.hash) {
 					setTxHash(result.hash);
-					dispatch(alert('Processing transaction blocks... ⌛️'));
+					infoToast('Processing transaction blocks... ⌛️');
 
-					setTimeout(async () => {
+					// setTimeout(async () => {
 						const id = await getDiceRequestId(bet);
 						await getDiceResult(id, dispatch);
 						onSpin();
 						setDisabled(false);
-						dispatch(close(''));
-					}, 10000);
+						// dispatch(close(''));
+					// }, 10000);
 				} else {
-					dispatch(alert('😰 Error: ' + result.status));
-					setTimeout(() => {
-						dispatch(close(''));
-					}, 2000);
+					infoToast('😰 Error: ' + result.status);
+					// setTimeout(() => {
+					// 	dispatch(close(''));
+					// }, 2000);
 					setDisabled(false);
 				}
 			}
 			// WHEEL
 			else if (game === 'wheel') {
-				dispatch(alert('Processing Transaction... 🔂'));
+				// dispatch(alert('Processing Transaction... 🔂'));
+				infoToast('Processing Transaction... 🔂');
 
 				const result = await spinWheel(Number(stake), account);
 
 				if (result.hash) {
 					setTxHash(result.hash);
-					dispatch(alert('Processing transaction blocks... ⌛️'));
+					infoToast('Processing transaction blocks... ⌛️');
+					// dispatch(alert('Processing transaction blocks... ⌛️'));
 
-					setTimeout(async () => {
+					// setTimeout(async () => {
 						const id = await getWheelRequestId();
 						await getWheelResult(id, dispatch);
 						onSpin();
 						setDisabled(false);
 						dispatch(close(''));
-					}, 10000);
+					// }, 10000);
 				} else {
-					dispatch(alert('😰 Error: ' + result.status));
-					setTimeout(() => {
-						dispatch(close(''));
-					}, 2000);
+					// 	dispatch(alert('😰 Error: ' + result.status))
+					errorToast('😰 Error: ' + result.status);
+					// setTimeout(() => {
+					// 	dispatch(close(''));
+					// }, 2000);
 					setDisabled(false);
 				}
 			}
 		} catch (error: any) {
-			console.error('❌ Error in spinGame:', error);
-			dispatch(alert('😰 Error: ' + error.message));
-			setTimeout(() => {
-				dispatch(close(''));
-			}, 2000);
+			// console.error('❌ Error in spinGame:', error);
+			errorToast('😰 Error: ' + error.message);
 			setDisabled(false);
 		}
 	};
@@ -372,7 +382,7 @@ const StakeCard = (props: StakeCardProps) => {
 						style={{
 							cursor: disabled ? 'not-allowed' : 'pointer',
 						}}
-						$spin={spin}
+						spin={spin}
 						onClick={!disabled ? spinGame : undefined}
 					>
 						{buttonText(game)}

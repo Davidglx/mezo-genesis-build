@@ -26,7 +26,10 @@ const Landingpage = (): JSX.Element => {
                     type="button"
                     onClick={setRedirect}
                 >
-                    <span style={{  backgroundColor: "#f07a2d"}}>Start playing</span>
+                    <span style={{  backgroundColor: "#f07a2d"}}>
+                        Start playing
+                         <img src="/assets/start-playing.svg" alt="playing" />
+                    </span>
                 </StartButton>
             </LandingpageComponent1>
 

@@ -18,6 +18,7 @@ export const Title = styled.h2`
   text-align: center;
   color: #0f172a;
   letter-spacing: -0.02em;
+  font-family: 'RobotoFlex';
 
   @media (max-width: 768px) { font-size: 2rem; }
   @media (max-width: 480px) { font-size: 1.6rem; }
@@ -30,6 +31,7 @@ export const Subtitle = styled.p`
   margin-top: 12px;
   font-size: 1.125rem;
   line-height: 1.7;
+  font-family: 'RobotoFlex';
 
   @media (max-width: 768px) { font-size: 1rem; max-width: 90%; }
   @media (max-width: 480px) { font-size: 0.9rem; }
@@ -65,19 +67,12 @@ export const GradientBackground = styled.div`
 export const ScrollContainer = styled.div`
   position: relative;
   z-index: 1;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: 24px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  scrollbar-width: none;
-
-  -ms-overflow-style: none;
+  
 `;
 
 
@@ -126,8 +121,10 @@ export const StepText = styled.p`
   line-height: 1.6;
   margin-bottom: 20px;
   text-align: left;
-  min-height: 100px;
+  font-family: 'RobotoFlex';
+  height: 120px;
   overflow-wrap: break-word;
+  
 
   @media (max-width: 768px) { font-size: 0.85rem; min-height: 90px; margin-bottom: 16px; }
   @media (max-width: 480px) { font-size: 0.8rem; min-height: 80px; margin-bottom: 12px; }

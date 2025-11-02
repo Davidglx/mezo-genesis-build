@@ -44,7 +44,7 @@ const StepsCarousel: React.FC = () => {
 
   return (
     <Container>
-      <Title>Steps to Use Mezo</Title>
+      <Title>Steps to Use Mezo-Genesis</Title>
       <Subtitle>Follow these simple steps to start your blockchain journey.</Subtitle>
 
       <CarouselWrapper>

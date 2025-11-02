@@ -29,11 +29,12 @@ const SpinWheel = ({
 }): JSX.Element => {
 	//selector
 	const result = useSelector((state:RootState)=> state.result.result)
+	console.log(result, 'wheel result');
 	// initial state
 	const [selectedItem, setSelectedItem]: any = useState(null);
 	const selectItem = () => {
 		// if (selectedItem === null) {
-		const selectedItem = result.randomWord
+		const selectedItem = result.wheelNumber
 		if (onSelectItem) {
 			onSelectItem(selectedItem);
 		}
