@@ -3,6 +3,8 @@
 import Layout from '../ui/widgets/Layout'
 import Landingpage from '../ui/widgets/Landingpage';
 import Slider from '../ui/components/Slider';
+import Footer from '../ui/components/Footer';
+
 
 
 // JSX Component
@@ -12,6 +14,7 @@ export default function Home() {
      <Layout background={setBackground}>
         <Landingpage />
         <Slider />
+        <Footer />
      </Layout>
   )
 }

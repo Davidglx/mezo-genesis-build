@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import { PoweredWrapper, Text, Logo } from "./index.styled";
 
-const index = () => {
+const PoweredByMezo = () => {
   return (
-    <div>
-      <p>Powered by MEZO.</p>
-      <img src="" alt="" />
-    </div>
-  )
-}
+    <PoweredWrapper>
+      <Text>Powered by</Text>
+      <Logo src="/assets/mezo.svg" alt="Mezo Logo" />
+    </PoweredWrapper>
+  );
+};
 
-export default index
+export default PoweredByMezo;
