@@ -57,8 +57,21 @@ const StepsCarousel: React.FC = () => {
                   <img
                     src={step.image}
                     alt={step.name}
-                    style={{ width: 50, height: 50 }}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: 12,
+                      boxShadow: "0 0 12px rgba(0,255,204,0.4)",
+                      transition: "transform 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+                    }}
                   />
+
                 </StepIconWrapper>
 
                 <StepText>
