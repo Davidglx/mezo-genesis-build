@@ -12,7 +12,7 @@ export const TextLogo = styled.a`
 	color: white;
 	display: flex;
 	@media (max-width: 576.98px) {
-		display: none;
+  width: 2rem;
 	}
 `;
 

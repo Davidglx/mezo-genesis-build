@@ -163,17 +163,23 @@ export const StartButton = styled.button`
     background: rgba(217, 217, 217, 0.2)
   }
   @media screen and (max-width: 442px) and (min-width: 350px) {
-    width: 85% !important;
-    height: 4rem;
+    width: 100% !important;
+    margin: 0;
+    margin-left: 2rem !important;
+    display : flex;
+    
+    // height: 4rem;
     span {
-      padding: 1.4rem 7.9rem !important
+      padding: 0.5rem
     }
   }
   @media screen and (max-width: 350px) and (min-width: 0px) {
-    width: 85% !important;
-    height: 4rem;
+    width: 100% !important;
+        margin: 0;
+            margin-left: 2rem !important;
+    // height: 4rem;
     span {
-      padding: 1.5rem 6.7rem !important
+      padding: 0.5rem;
     }
   }
   
