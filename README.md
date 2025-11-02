@@ -60,11 +60,11 @@ MEZO-Genesis solves these problems by:
 ## 🏗️ Technology Stack
 
 **Frontend:**
-- React + TypeScript - Modern UI framework
+- Next + TypeScript - Modern UI framework
 - Redux Toolkit - State management with persistence
 - Styled Components - Dynamic, themeable styling
 - ethers.js v6 - Blockchain interactions
-- React Router - Client-side routing
+
 
 **Smart Contracts:**
 - Solidity ^0.8.20 - Contract language
@@ -128,7 +128,7 @@ mezo-genesis/
 ## 🔗 Links
 
 - [Live link](https://mezo-genesis.netlify.app)
-- [YouTube](#)
+- [YouTube](https://www.youtube.com/watch?v=POU0h927QVU)
 - [Figma Design](https://www.figma.com/design/7Ize9gMFJbCMEi8x6RYvN0/MezoGenesis-build?node-id=0-1&p=f&t=VS1Pxnqze6ihfz7Z-0)
 - **Mezo Explorer:** [Coin](https://explorer.test.mezo.org/0xcdecCF70Dcee1B96dc7d2d146644EF48921A8201), [Dice](https://explorer.test.mezo.org/0xA3Bc22C7250A81DE7fd60D8Dc61ac7E6434126a7), [Wheel](https://explorer.test.mezo.org/0x3ed7b683b255f7d866327ce31e4B17cEeAdE578f)
 
