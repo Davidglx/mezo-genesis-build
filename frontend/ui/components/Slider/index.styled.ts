@@ -61,6 +61,7 @@ export const GradientBackground = styled.div`
   @media (max-width: 480px) { height: 300px; }
 `;
 
+
 export const ScrollContainer = styled.div`
   position: relative;
   z-index: 1;
@@ -70,12 +71,15 @@ export const ScrollContainer = styled.div`
   scroll-behavior: smooth;
   padding-bottom: 24px;
 
-  &::-webkit-scrollbar { height: 6px; }
-  &::-webkit-scrollbar-thumb {
-    background-color: #a7f3d0;
-    border-radius: 9999px;
+  &::-webkit-scrollbar {
+    display: none;
   }
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
 `;
+
 
 export const CardsWrapper = styled.div`
   display: flex;
